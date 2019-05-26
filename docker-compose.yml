@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  raylight:
+    # Replace this with image from registry
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "80:3001"
+    environment:
+      - DATABASE_URL=postgres://postgres:hunter2@db:5432/raylight
+    command: npm start
+    depends_on:
+      - db
+
+  db:
+    image: postgres:11.3
+    environment:
+      - POSTGRES_PASSWORD=hunter2
+      - POSTGRES_DB=raylight
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data

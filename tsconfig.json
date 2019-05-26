@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "esnext",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "jsx": "react",
+    "resolveJsonModule": true
+  },
+  "exclude": ["node_modules", "dist"]
+}

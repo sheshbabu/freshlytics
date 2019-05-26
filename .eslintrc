@@ -1,0 +1,14 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "extends": ["eslint:recommended", "eslint-config-prettier"],
+  "env": {
+    "es6": true
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "no-unused-vars": "off"
+  }
+}

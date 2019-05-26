@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  raylight:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+    volumes:
+      - ./src/client:/app/src/client
+      - ./src/server:/app/src/server
+    command: npm run dev
+
+  db:
+    ports:
+      - 5432:5432
