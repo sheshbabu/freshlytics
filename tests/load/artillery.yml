@@ -8,12 +8,19 @@ config:
     - duration: 600
       arrivalRate: 50
       name: "Sustained max load"
+  payload:
+    path: "pageview_events.csv"
+    fields:
+      - "projectId"
+      - "path"
+      - "referrer"
+      - "ua"
 scenarios:
   - flow:
       - post:
           url: "/api/collect"
           json:
-            projectId: "1000"
-            path: "/hello"
-            referrer: "Google"
-            ua: "Mozilla"
+            projectId: "{{ projectId }}"
+            path: "{{ path }}"
+            referrer: "{{ referrer }}"
+            ua: "{{ ua }}"
