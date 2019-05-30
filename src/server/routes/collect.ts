@@ -29,7 +29,7 @@ function mapRequestPayload(req: Request): PageViewEvent {
 }
 
 function validateRequestPayload(payload: PageViewEventPayload) {
-  if (typeof payload.projectId !== "string") {
+  if (typeof payload.projectId !== "number") {
     throw new Error("projectId not sent");
   }
 

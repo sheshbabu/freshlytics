@@ -1,12 +1,12 @@
 export type PageViewEventPayload = {
-  projectId: string;
+  projectId: number;
   path: string;
   referrer: string;
   ua: string;
 };
 
 export type PageViewEvent = {
-  projectId: string;
+  projectId: number;
   path: string;
   referrer: string;
   date: string;
