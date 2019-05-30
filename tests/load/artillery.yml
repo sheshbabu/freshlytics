@@ -1,0 +1,19 @@
+config:
+  target: "http://localhost:3001"
+  phases:
+    - duration: 120
+      arrivalRate: 10
+      rampTo: 50
+      name: "Warm up the application"
+    - duration: 600
+      arrivalRate: 50
+      name: "Sustained max load"
+scenarios:
+  - flow:
+      - post:
+          url: "/api/collect"
+          json:
+            projectId: "1000"
+            path: "/hello"
+            referrer: "Google"
+            ua: "Mozilla"

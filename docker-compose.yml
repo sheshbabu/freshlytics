@@ -15,7 +15,7 @@ services:
       - db
 
   db:
-    image: postgres:11.3
+    image: pipelinedb/pipelinedb-postgresql-11
     environment:
       - POSTGRES_PASSWORD=hunter2
       - POSTGRES_DB=raylight
