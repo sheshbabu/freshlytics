@@ -16,11 +16,10 @@ async function collect(req: Request, res: Response, next: Next) {
 
 function mapRequestPayload(req: Request): PageViewEvent {
   const payload: PageViewEventPayload = req.body;
-  const ua = req.headers["user-agent"] || "";
 
   validateRequestPayload(payload);
 
-  const { projectId, path, referrer } = payload;
+  const { projectId, path, referrer, ua } = payload;
   const date = DateTimeUtil.getCurrentDateInUtc();
   const browserName = UserAgentUtil.getBrowserName(ua);
   const browserNameVersion = UserAgentUtil.getBrowserNameVersion(ua);
