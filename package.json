@@ -14,8 +14,8 @@
     "build:server": "tsc --build ./src/server/tsconfig.server.json",
     "build:client": "webpack --mode=production --progress --profile --config ./src/client/webpack.config.js",
     "migrate": "node-pg-migrate -m ./src/server/migrations -j sql up",
-    "migrate:dry": "node-pg-migrate -m ./src/server/migrations -j sql up",
     "migrate:create": "node-pg-migrate -m ./src/server/migrations -j sql create",
+    "seed": "ts-node ./src/server/seed.ts",
     "lint": "eslint --ext .ts,.tsx .",
     "test:load": "artillery run ./tests/load/artillery.yml",
     "precommit": "lint-staged"
