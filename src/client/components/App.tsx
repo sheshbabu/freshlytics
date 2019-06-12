@@ -3,6 +3,7 @@ import { Container, Header } from "semantic-ui-react";
 import { DatesRangeInput } from "semantic-ui-calendar-react";
 import Navbar from "./Navbar";
 import Chart from "./Chart";
+import MetricsTable from "./MetricsTable";
 import styles from "./App.css";
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
         />
       </div>
       <Chart />
+      <MetricsTable />
     </Container>
   );
 }
