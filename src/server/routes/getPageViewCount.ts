@@ -3,8 +3,8 @@ import DailyPageViewTotals from "../database/DailyPageViewTotals";
 
 async function getPageViewCount(req: Request, res: Response, next: Next) {
   try {
-    const pageViews = await DailyPageViewTotals.getCount();
-    res.send(pageViews);
+    const rows = await DailyPageViewTotals.getCount();
+    res.send(rows);
   } catch (e) {
     next(e);
   }
