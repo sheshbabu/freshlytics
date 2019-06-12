@@ -7,13 +7,15 @@ type PageViewCount = {
   total: string;
 };
 
-type State = null | PageViewCount[];
+type State = PageViewCount[] | null;
 
 export default function Chart() {
   const [pageViews, setPageViews] = React.useState<State>(null);
 
   React.useEffect(() => {
-    getData(setPageViews);
+    fetch("/api/metric/pageview")
+      .then(response => response.json())
+      .then(data => setPageViews(data));
   }, []);
 
   if (pageViews === null) {
@@ -32,10 +34,4 @@ export default function Chart() {
       }}
     />
   );
-}
-
-async function getData(setPageViews: Function) {
-  const response = await fetch("/api/metric/pageview");
-  const data = await response.json();
-  setPageViews(data);
 }
