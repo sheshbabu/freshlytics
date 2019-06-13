@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction as Next } from "express";
 import DailyPathPageViewTotals from "../database/DailyPathPageViewTotals";
 
-async function getPageViewCount(req: Request, res: Response, next: Next) {
+async function getPathPageViewTotals(req: Request, res: Response, next: Next) {
   try {
     const rows = await DailyPathPageViewTotals.getPathTotals();
     res.send(rows);
@@ -10,4 +10,4 @@ async function getPageViewCount(req: Request, res: Response, next: Next) {
   }
 }
 
-export default getPageViewCount;
+export default getPathPageViewTotals;
