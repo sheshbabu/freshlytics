@@ -1,43 +1,38 @@
 import React from "react";
 import { Table } from "semantic-ui-react";
 
-type State = Array<Row> | null;
+type Props = {
+  columnName: string;
+  rows: Array<Row> | null;
+};
 
 type Row = {
-  path: string;
+  name: string;
   total: string;
 };
 
-export default function MetricsTable() {
-  const [rows, setRows] = React.useState<State>(null);
-
-  React.useEffect(() => {
-    fetch("/api/metric/pageview/path")
-      .then(response => response.json())
-      .then(setRows);
-  }, []);
-
-  if (rows === null) {
+export default function MetricsTable(props: Props) {
+  if (props.rows === null) {
     return null;
   }
 
-  const tableRows = rows.map((row, index) => (
+  const rows = props.rows.map((row, index) => (
     <MetricsTableRow key={index} {...row} />
   ));
 
   return (
-    <Table celled striped singleLine>
-      <MetricsTableHeader />
-      <Table.Body>{tableRows}</Table.Body>
+    <Table celled striped singleLine compact>
+      <MetricsTableHeader {...props} />
+      <Table.Body>{rows}</Table.Body>
     </Table>
   );
 }
 
-function MetricsTableHeader() {
+function MetricsTableHeader(props: Props) {
   return (
     <Table.Header>
       <Table.Row>
-        <Table.HeaderCell width={4}>Path</Table.HeaderCell>
+        <Table.HeaderCell width={4}>{props.columnName}</Table.HeaderCell>
         <Table.HeaderCell width={1} textAlign="right">
           PageViews
         </Table.HeaderCell>
@@ -49,7 +44,7 @@ function MetricsTableHeader() {
 function MetricsTableRow(props: Row) {
   return (
     <Table.Row>
-      <Table.Cell>{props.path}</Table.Cell>
+      <Table.Cell>{props.name}</Table.Cell>
       <Table.Cell textAlign="right">{props.total}</Table.Cell>
     </Table.Row>
   );

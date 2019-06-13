@@ -1,6 +1,5 @@
 import React from "react";
 import { Chart as FrappeChart } from "frappe-charts/dist/frappe-charts.min.esm";
-import "./FrappeChartWrapper.css";
 
 type Props = {
   type: "line" | "bar" | "axis-mixed" | "pie" | "percentage" | "heatmap";

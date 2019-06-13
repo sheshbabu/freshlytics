@@ -1,5 +1,6 @@
 import React from "react";
 import format from "date-fns/format";
+import { Segment } from "semantic-ui-react";
 import FrappeChartWrapper from "./FrappeChartWrapper";
 
 type PageViewCount = {
@@ -7,31 +8,29 @@ type PageViewCount = {
   total: string;
 };
 
-type State = PageViewCount[] | null;
+type Props = {
+  pageViews: PageViewCount[] | null;
+};
 
-export default function Chart() {
-  const [pageViews, setPageViews] = React.useState<State>(null);
-
-  React.useEffect(() => {
-    fetch("/api/metric/pageview")
-      .then(response => response.json())
-      .then(data => setPageViews(data));
-  }, []);
+export default function Chart(props: Props) {
+  const { pageViews } = props;
 
   if (pageViews === null) {
     return null;
   }
 
   return (
-    <FrappeChartWrapper
-      type="bar"
-      colors={["#21ba45"]}
-      axisOptions={{ xAxisMode: "tick", yAxisMode: "tick", xIsSeries: 1 }}
-      height={250}
-      data={{
-        labels: pageViews.map(d => format(d.date, "DD MMM YY")),
-        datasets: [{ values: pageViews.map(d => parseInt(d.total, 10)) }]
-      }}
-    />
+    <Segment style={{ boxShadow: "none" }}>
+      <FrappeChartWrapper
+        type="bar"
+        colors={["#21ba45"]}
+        axisOptions={{ xAxisMode: "tick", yAxisMode: "tick", xIsSeries: 1 }}
+        height={250}
+        data={{
+          labels: pageViews.map(d => format(d.date, "DD MMM YY")),
+          datasets: [{ values: pageViews.map(d => parseInt(d.total, 10)) }]
+        }}
+      />
+    </Segment>
   );
 }
