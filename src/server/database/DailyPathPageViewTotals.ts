@@ -5,13 +5,22 @@ type Row = {
   total: string;
 };
 
-async function getPathTotals(): Promise<Row[]> {
+async function getPathTotals(projectId: string, startDate = "", endDate = ""): Promise<Row[]> {
+  let dateClause = "";
+  let values = [projectId];
+
+  if (startDate && endDate) {
+    dateClause = "AND date BETWEEN $2 AND $3";
+    values = values.concat([startDate, endDate]);
+  }
+
   const statement = `
     SELECT path as name, SUM(total) as total
     FROM DailyPathPageViewTotals
+    WHERE projectId = $1 ${dateClause}
     GROUP BY path
   `;
-  const result = await Database.query(statement, []);
+  const result = await Database.query(statement, values);
   return result.rows;
 }
 

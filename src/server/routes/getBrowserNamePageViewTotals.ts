@@ -1,13 +1,13 @@
 import { Request, Response, NextFunction as Next } from "express";
 import DailyBrowserNamePageViewTotals from "../database/DailyBrowserNamePageViewTotals";
 
-async function getBrowserNamePageViewTotals(
-  req: Request,
-  res: Response,
-  next: Next
-) {
+async function getBrowserNamePageViewTotals(req: Request, res: Response, next: Next) {
+  const projectId = req.query.projectId;
+  const startDate = req.query.startDate;
+  const endDate = req.query.endDate;
+
   try {
-    const rows = await DailyBrowserNamePageViewTotals.getBrowserNameTotals();
+    const rows = await DailyBrowserNamePageViewTotals.getBrowserNameTotals(projectId, startDate, endDate);
     res.send(rows);
   } catch (e) {
     next(e);
