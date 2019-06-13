@@ -1,13 +1,13 @@
 import Database from ".";
 
-type PathPageViewTotals = {
-  path: string;
+type Row = {
+  name: string;
   total: string;
 };
 
-async function getPathTotals(): Promise<PathPageViewTotals[]> {
+async function getPathTotals(): Promise<Row[]> {
   const statement = `
-    SELECT path, SUM(total) as total
+    SELECT path as name, SUM(total) as total
     FROM DailyPathPageViewTotals
     GROUP BY path
   `;
