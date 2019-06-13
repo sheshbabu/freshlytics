@@ -5,6 +5,8 @@ import Chart from "../components/Chart";
 import MetricsTable from "../components/MetricsTable";
 import Spinner from "../components/Spinner";
 
+const DEFAULT_PROJECT_ID = 1000;
+
 export default class PageViewContainer extends React.Component {
   state = {
     pageViewTotals: null,
@@ -12,16 +14,21 @@ export default class PageViewContainer extends React.Component {
     pageViewsByReferrer: null,
     pageViewsByBrowserName: null,
     pageViewsByBrowserNameVersion: null,
+    dateRange: "",
     isLoading: true
   };
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.makeRequests();
+  }
+
+  async makeRequests() {
     const results = await Promise.all([
-      this.fetch("/api/metric/pageview"),
-      this.fetch("/api/metric/pageview/path"),
-      this.fetch("/api/metric/pageview/referrer"),
-      this.fetch("/api/metric/pageview/browserName"),
-      this.fetch("/api/metric/pageview/browserNameVersion")
+      this.request("/api/metric/pageview"),
+      this.request("/api/metric/pageview/path"),
+      this.request("/api/metric/pageview/referrer"),
+      this.request("/api/metric/pageview/browserName"),
+      this.request("/api/metric/pageview/browserNameVersion")
     ]);
 
     this.setState({
@@ -34,10 +41,25 @@ export default class PageViewContainer extends React.Component {
     });
   }
 
-  async fetch(path: string) {
+  async request(path: string) {
+    const projectId = DEFAULT_PROJECT_ID;
+    const startDate = this.state.dateRange.split(" - ")[0];
+    const endDate = this.state.dateRange.split(" - ")[1];
+
+    path = `${path}?projectId=${projectId}`;
+
+    if (startDate !== "" && endDate !== "") {
+      path = `${path}&startDate=${startDate}&endDate=${endDate}`;
+    }
+
     const response = await fetch(path);
     return await response.json();
   }
+
+  handleDateChange = (_event: React.SyntheticEvent, data: any) => {
+    const dateRange = data.value;
+    this.setState({ dateRange }, this.makeRequests);
+  };
 
   render() {
     const {
@@ -46,7 +68,8 @@ export default class PageViewContainer extends React.Component {
       pageViewsByReferrer,
       pageViewsByBrowserName,
       pageViewsByBrowserNameVersion,
-      isLoading
+      isLoading,
+      dateRange
     } = this.state;
 
     if (isLoading) {
@@ -56,7 +79,7 @@ export default class PageViewContainer extends React.Component {
     return (
       <Container text>
         <Divider hidden />
-        <Titlebar />
+        <Titlebar dateRange={dateRange} onDateChange={this.handleDateChange} />
         <Divider hidden />
         <Chart pageViews={pageViewTotals} />
         <Divider hidden />
@@ -66,10 +89,7 @@ export default class PageViewContainer extends React.Component {
         <Divider hidden />
         <MetricsTable columnName="Browsers" rows={pageViewsByBrowserName} />
         <Divider hidden />
-        <MetricsTable
-          columnName="Browser Versions"
-          rows={pageViewsByBrowserNameVersion}
-        />
+        <MetricsTable columnName="Browser Versions" rows={pageViewsByBrowserNameVersion} />
         <Divider hidden />
       </Container>
     );
