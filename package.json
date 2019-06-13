@@ -20,6 +20,9 @@
     "test:load": "artillery run ./tests/load/artillery.yml",
     "precommit": "lint-staged"
   },
+  "prettier": {
+    "printWidth": 120
+  },
   "lint-staged": {
     "*.{ts,tsx}": [
       "eslint --fix",
