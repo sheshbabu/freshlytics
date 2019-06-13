@@ -1,6 +1,5 @@
 import React from "react";
 import { Table } from "semantic-ui-react";
-import styles from "./MetricsTable.css";
 
 type State = Array<Row> | null;
 
@@ -27,12 +26,10 @@ export default function MetricsTable() {
   ));
 
   return (
-    <div className={styles.container}>
-      <Table celled striped singleLine>
-        <MetricsTableHeader />
-        <Table.Body>{tableRows}</Table.Body>
-      </Table>
-    </div>
+    <Table celled striped singleLine>
+      <MetricsTableHeader />
+      <Table.Body>{tableRows}</Table.Body>
+    </Table>
   );
 }
 
