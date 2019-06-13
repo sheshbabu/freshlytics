@@ -7,7 +7,7 @@ function getBrowserName(ua: string) {
 
 function getBrowserNameVersion(ua: string) {
   const agent = useragent.lookup(ua);
-  return `${agent.family}-${agent.major}`;
+  return `${agent.family} ${agent.major}`;
 }
 
 export default {
