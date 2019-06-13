@@ -34,7 +34,7 @@ function MetricsTableHeader(props: Props) {
       <Table.Row>
         <Table.HeaderCell width={4}>{props.columnName}</Table.HeaderCell>
         <Table.HeaderCell width={1} textAlign="right">
-          PageViews
+          Total Page Views
         </Table.HeaderCell>
       </Table.Row>
     </Table.Header>

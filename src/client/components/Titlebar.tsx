@@ -15,7 +15,7 @@ export default function Titlebar() {
 function PageHeader() {
   return (
     <Header size="huge" style={{ margin: 0 }}>
-      Pageviews
+      Page Views
     </Header>
   );
 }
