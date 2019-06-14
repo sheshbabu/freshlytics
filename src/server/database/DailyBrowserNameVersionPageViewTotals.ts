@@ -19,6 +19,7 @@ async function getBrowserNameVersionTotals(projectId: string, startDate = "", en
     FROM DailyBrowserNameVersionPageViewTotals
     WHERE projectId = $1 ${dateClause}
     GROUP BY browserNameVersion
+    LIMIT 5
   `;
   const result = await Database.query(statement, values);
   return result.rows;

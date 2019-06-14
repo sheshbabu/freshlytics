@@ -19,6 +19,7 @@ async function getPathTotals(projectId: string, startDate = "", endDate = ""): P
     FROM DailyPathPageViewTotals
     WHERE projectId = $1 ${dateClause}
     GROUP BY path
+    LIMIT 20
   `;
   const result = await Database.query(statement, values);
   return result.rows;

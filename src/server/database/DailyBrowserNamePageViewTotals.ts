@@ -19,6 +19,7 @@ async function getBrowserNameTotals(projectId: string, startDate = "", endDate =
     FROM DailyBrowserNamePageViewTotals
     WHERE projectId = $1 ${dateClause}
     GROUP BY browserName
+    LIMIT 5
   `;
   const result = await Database.query(statement, values);
   return result.rows;

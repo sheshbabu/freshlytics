@@ -19,6 +19,7 @@ async function getReferrerTotals(projectId: string, startDate = "", endDate = ""
     FROM DailyReferrerPageViewTotals
     WHERE projectId = $1 ${dateClause}
     GROUP BY referrer
+    LIMIT 10
   `;
   const result = await Database.query(statement, values);
   return result.rows;
