@@ -19,7 +19,7 @@ export default function MetricsTable(props: Props) {
   const rows = props.rows.map((row, index) => <MetricsTableRow key={index} {...row} />);
 
   return (
-    <Table celled striped singleLine compact>
+    <Table celled striped singleLine compact size="small">
       <MetricsTableHeader {...props} />
       <Table.Body>{rows}</Table.Body>
     </Table>
@@ -30,7 +30,7 @@ function MetricsTableHeader(props: Props) {
   return (
     <Table.Header>
       <Table.Row>
-        <Table.HeaderCell width={4}>{props.columnName}</Table.HeaderCell>
+        <Table.HeaderCell width={9}>{props.columnName}</Table.HeaderCell>
         <Table.HeaderCell width={1} textAlign="right">
           Total Page Views
         </Table.HeaderCell>
