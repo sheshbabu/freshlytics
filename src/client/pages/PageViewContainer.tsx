@@ -58,7 +58,10 @@ export default class PageViewContainer extends React.Component {
 
   handleDateChange = (_event: React.SyntheticEvent, data: any) => {
     const dateRange = data.value;
-    this.setState({ dateRange }, this.makeRequests);
+    const startDate = dateRange.split(" - ")[0];
+    const endDate = dateRange.split(" - ")[1];
+
+    this.setState({ dateRange }, () => startDate !== "" && endDate !== "" && this.makeRequests());
   };
 
   render() {
@@ -68,8 +71,8 @@ export default class PageViewContainer extends React.Component {
       pageViewsByReferrer,
       pageViewsByBrowserName,
       pageViewsByBrowserNameVersion,
-      isLoading,
-      dateRange
+      dateRange,
+      isLoading
     } = this.state;
 
     if (isLoading) {
