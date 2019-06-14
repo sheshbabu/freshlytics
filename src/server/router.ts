@@ -13,10 +13,7 @@ router.use("/collect", collect);
 router.use("/metric/pageview/path", getPathPageViewTotals);
 router.use("/metric/pageview/referrer", getReferrerPageViewTotals);
 router.use("/metric/pageview/browserName", getBrowserNamePageViewTotals);
-router.use(
-  "/metric/pageview/browserNameVersion",
-  getBrowserNameVersionPageViewTotals
-);
+router.use("/metric/pageview/browserNameVersion", getBrowserNameVersionPageViewTotals);
 router.use("/metric/pageview", getPageviewCount);
 
 export default router;

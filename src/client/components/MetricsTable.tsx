@@ -16,9 +16,7 @@ export default function MetricsTable(props: Props) {
     return null;
   }
 
-  const rows = props.rows.map((row, index) => (
-    <MetricsTableRow key={index} {...row} />
-  ));
+  const rows = props.rows.map((row, index) => <MetricsTableRow key={index} {...row} />);
 
   return (
     <Table celled striped singleLine compact>
