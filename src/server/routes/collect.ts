@@ -15,7 +15,12 @@ async function collect(req: Request, res: Response, next: Next) {
 }
 
 function mapRequestPayload(req: Request): PageViewEvent {
-  const payload: PageViewEventPayload = req.body;
+  const payload: PageViewEventPayload = {
+    projectId: req.query.projectId,
+    path: req.query.path,
+    referrer: req.query.referrer,
+    ua: req.headers["user-agent"] || ""
+  };
 
   validateRequestPayload(payload);
 
@@ -28,7 +33,7 @@ function mapRequestPayload(req: Request): PageViewEvent {
 }
 
 function validateRequestPayload(payload: PageViewEventPayload) {
-  if (typeof payload.projectId !== "number") {
+  if (typeof payload.projectId !== "string") {
     throw new Error("projectId not sent");
   }
 
@@ -41,7 +46,7 @@ function validateRequestPayload(payload: PageViewEventPayload) {
   }
 
   if (typeof payload.ua !== "string") {
-    throw new Error("projectId not sent");
+    throw new Error("useragent not sent");
   }
 }
 
