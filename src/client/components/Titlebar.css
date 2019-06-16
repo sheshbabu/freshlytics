@@ -3,3 +3,7 @@
   justify-content: space-between;
   align-items: center;
 }
+
+[name="raylight-date-input"] {
+  width: 250px; /* Overriding width to fix cutoffs in Chrome/Safari */
+}
