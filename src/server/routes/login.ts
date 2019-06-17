@@ -18,6 +18,7 @@ export default async function login(req: Request, res: Response, next: NextFunct
 
     if (req.session && req.session.user === undefined) {
       req.session.user = user;
+      req.session.user.isAuthenticated = true;
     }
 
     let shouldForcePasswordChange = false;
