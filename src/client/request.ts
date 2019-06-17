@@ -1,10 +1,17 @@
-export default function request(path: string, method: string = "GET", body: any = {}) {
+export default async function request(path: string, method: string = "GET", body: any = {}) {
   const host = getHost();
   const headers = {
     "Content-Type": "application/json"
   };
 
-  return fetch(`${host}${path}`, { method, body, headers }).then(res => res.json());
+  const response = await fetch(`${host}${path}`, { method, body, headers });
+  const responseBody = await response.json();
+
+  if (!response.ok) {
+    throw responseBody;
+  }
+
+  return responseBody;
 }
 
 function getHost() {
