@@ -1,0 +1,18 @@
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.form {
+  width: 400px;
+  padding-right: 90px;
+}
+
+.illustration {
+  background: url("../assets/login.png");
+  background-size: cover;
+  width: 50%;
+  height: 500px;
+}
