@@ -1,15 +1,11 @@
 config:
   target: "http://localhost:3001"
   phases:
-    - duration: 120
-      arrivalRate: 10
-      rampTo: 50
-      name: "Warm up the application"
     - duration: 600
       arrivalRate: 50
-      name: "Sustained max load"
   payload:
     path: "pageview_events.csv"
+    cast: false
     fields:
       - "projectId"
       - "path"
@@ -17,10 +13,7 @@ config:
       - "ua"
 scenarios:
   - flow:
-      - post:
-          url: "/api/collect"
-          json:
-            projectId: "{{ projectId }}"
-            path: "{{ path }}"
-            referrer: "{{ referrer }}"
-            ua: "{{ ua }}"
+      - get:
+          url: "/api/collect/?projectId={{ projectId }}&path={{ path }}&referrer={{ referrer }}"
+          headers:
+            user-agent: "{{ ua }}"
