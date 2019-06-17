@@ -17,7 +17,7 @@ while (isBefore(currDate, endDate) || isEqual(currDate, endDate)) {
   const eventCount = pickRandomNumber(200, 1000);
   for (let event = 1; event < eventCount; event++) {
     PageViewStream.insert({
-      projectId: 1000,
+      projectId: "1000",
       date: format(currDate, "YYYY-MM-DD"),
       path: pickRandomItem(paths),
       referrer: pickRandomItem(referrers),
