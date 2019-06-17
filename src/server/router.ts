@@ -1,5 +1,7 @@
 import express from "express";
 import collect from "./routes/collect";
+import login from "./routes/login";
+import changePassword from "./routes/changePassword";
 import getPageviewCount from "./routes/getPageViewCount";
 import getPathPageViewTotals from "./routes/getPathPageViewTotals";
 import getReferrerPageViewTotals from "./routes/getReferrerPageViewTotals";
@@ -9,6 +11,9 @@ import getBrowserNameVersionPageViewTotals from "./routes/getBrowserNameVersionP
 const router = express.Router();
 
 router.use("/collect", collect);
+
+router.use("/login", login);
+router.use("/password", changePassword);
 
 router.use("/metric/pageview/path", getPathPageViewTotals);
 router.use("/metric/pageview/referrer", getReferrerPageViewTotals);

@@ -8,8 +8,8 @@ export default function App() {
   return (
     <BrowserRouter>
       <Route path="/" exact component={PageViewContainer} />
-      <Route path="/login/" component={LoginContainer} />
-      <Route path="/password/" component={ChangePasswordContainer} />
+      <Route path="/login" component={LoginContainer} />
+      <Route path="/password" component={ChangePasswordContainer} />
     </BrowserRouter>
   );
 }
