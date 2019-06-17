@@ -2,13 +2,17 @@ import path from "path";
 import express, { Request, Response, NextFunction as Next } from "express";
 import compression from "compression";
 import bodyParser from "body-parser";
+import session from "express-session";
+import cors from "cors";
 import Database from "./database";
 import router from "./router";
 
 const app = express();
 
+app.use(cors());
 app.use(compression());
 app.use(bodyParser.json());
+app.use(session({ secret: "raylight", resave: false, saveUninitialized: true }));
 app.use(express.static(path.resolve(__dirname, "./client")));
 app.use("/api", router);
 app.use(handleError);
