@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Form, Header } from "semantic-ui-react";
+import { Button, Form, Header, Message } from "semantic-ui-react";
 import request from "../request";
 import styles from "./LoginContainer.css";
 
@@ -15,10 +15,14 @@ export default function LoginContainer() {
 function LoginForm() {
   const [username, setUsername] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
+  const [error, setError] = React.useState<string>("");
 
   return (
     <div className={styles.form}>
       <Header as="h1">Welcome!</Header>
+      <Message error hidden={error === ""}>
+        {error}
+      </Message>
       <Form>
         <Form.Field>
           <label>Username</label>
@@ -28,7 +32,8 @@ function LoginForm() {
           <label>Password</label>
           <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
         </Form.Field>
-        <Button type="submit" color="green" onClick={() => handleSubmit(username, password)}>
+
+        <Button type="submit" color="green" onClick={() => handleSubmit(username, password, setError)}>
           Sign In
         </Button>
       </Form>
@@ -40,12 +45,17 @@ function LoginIllustration() {
   return <div className={styles.illustration} />;
 }
 
-async function handleSubmit(username: string, password: string) {
-  const response = await request("/api/login", "POST", JSON.stringify({ username, password }));
+async function handleSubmit(username: string, password: string, setError: Function) {
+  try {
+    const response = await request("/api/login", "POST", JSON.stringify({ username, password }));
+    setError("");
 
-  if (response.shouldForcePasswordChange) {
-    location.replace("/password");
-  } else {
-    location.replace("/");
+    if (response.shouldForcePasswordChange) {
+      location.replace("/password");
+    } else {
+      location.replace("/");
+    }
+  } catch (e) {
+    setError(e.message);
   }
 }
