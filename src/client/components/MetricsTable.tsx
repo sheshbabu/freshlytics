@@ -6,7 +6,7 @@ type Props = {
   rows: Array<Row> | null;
 };
 
-type Row = {
+export type Row = {
   name: string;
   total: string;
 };

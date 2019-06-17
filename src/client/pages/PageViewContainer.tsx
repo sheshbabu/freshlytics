@@ -1,14 +1,25 @@
 import React from "react";
 import { Container, Divider } from "semantic-ui-react";
 import Titlebar from "../components/Titlebar";
-import Chart from "../components/Chart";
-import MetricsTable from "../components/MetricsTable";
+import Chart, { PageViewCount } from "../components/Chart";
+import MetricsTable, { Row } from "../components/MetricsTable";
 import Spinner from "../components/Spinner";
+import NoResults from "../components/NoResults";
 
 const DEFAULT_PROJECT_ID = 1000;
 
+type State = {
+  pageViewTotals: PageViewCount[] | null;
+  pageViewsByPath: Array<Row> | null;
+  pageViewsByReferrer: Array<Row> | null;
+  pageViewsByBrowserName: Array<Row> | null;
+  pageViewsByBrowserNameVersion: Array<Row> | null;
+  dateRange: string;
+  isLoading: boolean;
+};
+
 export default class PageViewContainer extends React.Component {
-  state = {
+  state: State = {
     pageViewTotals: null,
     pageViewsByPath: null,
     pageViewsByReferrer: null,
@@ -75,25 +86,35 @@ export default class PageViewContainer extends React.Component {
       isLoading
     } = this.state;
 
+    let content = <NoResults />;
+
     if (isLoading) {
-      return <Spinner />;
+      content = <Spinner />;
+    }
+
+    if (pageViewTotals !== null && pageViewTotals.length !== 0) {
+      content = (
+        <>
+          <Divider hidden />
+          <Chart pageViews={pageViewTotals} />
+          <Divider hidden />
+          <MetricsTable columnName="Pages" rows={pageViewsByPath} />
+          <Divider hidden />
+          <MetricsTable columnName="Referrers" rows={pageViewsByReferrer} />
+          <Divider hidden />
+          <MetricsTable columnName="Browsers" rows={pageViewsByBrowserName} />
+          <Divider hidden />
+          <MetricsTable columnName="Browser Versions" rows={pageViewsByBrowserNameVersion} />
+          <Divider hidden />
+        </>
+      );
     }
 
     return (
       <Container text>
         <Divider hidden />
         <Titlebar dateRange={dateRange} onDateChange={this.handleDateChange} />
-        <Divider hidden />
-        <Chart pageViews={pageViewTotals} />
-        <Divider hidden />
-        <MetricsTable columnName="Pages" rows={pageViewsByPath} />
-        <Divider hidden />
-        <MetricsTable columnName="Referrers" rows={pageViewsByReferrer} />
-        <Divider hidden />
-        <MetricsTable columnName="Browsers" rows={pageViewsByBrowserName} />
-        <Divider hidden />
-        <MetricsTable columnName="Browser Versions" rows={pageViewsByBrowserNameVersion} />
-        <Divider hidden />
+        {content}
       </Container>
     );
   }

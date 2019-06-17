@@ -3,7 +3,7 @@ import format from "date-fns/format";
 import { Segment } from "semantic-ui-react";
 import FrappeChartWrapper from "./FrappeChartWrapper";
 
-type PageViewCount = {
+export type PageViewCount = {
   date: string;
   total: string;
 };
