@@ -5,6 +5,7 @@ import Chart, { PageViewCount } from "../components/Chart";
 import MetricsTable, { Row } from "../components/MetricsTable";
 import Spinner from "../components/Spinner";
 import NoResults from "../components/NoResults";
+import request from "../request";
 
 const DEFAULT_PROJECT_ID = 1000;
 
@@ -35,11 +36,11 @@ export default class PageViewContainer extends React.Component {
 
   async makeRequests() {
     const results = await Promise.all([
-      this.request("/api/metric/pageview"),
-      this.request("/api/metric/pageview/path"),
-      this.request("/api/metric/pageview/referrer"),
-      this.request("/api/metric/pageview/browserName"),
-      this.request("/api/metric/pageview/browserNameVersion")
+      this.makeRequest("/api/metric/pageview"),
+      this.makeRequest("/api/metric/pageview/path"),
+      this.makeRequest("/api/metric/pageview/referrer"),
+      this.makeRequest("/api/metric/pageview/browserName"),
+      this.makeRequest("/api/metric/pageview/browserNameVersion")
     ]);
 
     this.setState({
@@ -52,7 +53,7 @@ export default class PageViewContainer extends React.Component {
     });
   }
 
-  async request(path: string) {
+  async makeRequest(path: string) {
     const projectId = DEFAULT_PROJECT_ID;
     const startDate = this.state.dateRange.split(" - ")[0];
     const endDate = this.state.dateRange.split(" - ")[1];
@@ -63,8 +64,7 @@ export default class PageViewContainer extends React.Component {
       path = `${path}&startDate=${startDate}&endDate=${endDate}`;
     }
 
-    const response = await fetch(path);
-    return await response.json();
+    return await request(path);
   }
 
   handleDateChange = (_event: React.SyntheticEvent, data: any) => {
