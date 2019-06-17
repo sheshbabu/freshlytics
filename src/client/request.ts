@@ -1,4 +1,4 @@
-export default async function request(path: string, method: string = "GET", body: any = {}) {
+export default async function request(path: string, method: string = "GET", body?: any) {
   const host = getHost();
   const headers = {
     "Content-Type": "application/json"
