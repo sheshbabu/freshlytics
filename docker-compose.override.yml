@@ -11,6 +11,8 @@ services:
     volumes:
       - ./src/client:/app/src/client
       - ./src/server:/app/src/server
+    environment:
+      - NODE_ENV=development
     command: npm run dev
 
   db:
