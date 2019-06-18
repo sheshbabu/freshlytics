@@ -1,6 +1,16 @@
 # Raylight
 
-Analytics
+Open source privacy-friendly analytics
+
+## Screenshots
+
+Home
+
+![Screenshot](./docs/home.png)
+
+Login
+
+![Screenshot](./docs/login.png)
 
 ## Local development
 
