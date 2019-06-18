@@ -48,6 +48,7 @@ function LoginIllustration() {
 async function handleSubmit(username: string, password: string, setError: Function) {
   try {
     const response = await request("/api/login", "POST", JSON.stringify({ username, password }));
+    localStorage.setItem("isAuthenticated", "true");
     setError("");
 
     if (response.shouldForcePasswordChange) {
