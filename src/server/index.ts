@@ -9,7 +9,10 @@ import router from "./router";
 
 const app = express();
 
-app.use(cors());
+if (process.env.NODE_ENV === "development") {
+  app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+}
+
 app.use(compression());
 app.use(bodyParser.json());
 app.use(session({ secret: "raylight", resave: false, saveUninitialized: true }));
@@ -24,7 +27,7 @@ process.on("unhandledRejection", gracefullyExitProcess);
 process.on("SIGINT", gracefullyExitProcess);
 
 function ensureAuthenticated(req: Request, res: Response, next: Next) {
-  if (req.path === "/api/login" || req.path === "/api/collect") {
+  if (req.path === "/login" || req.path === "/collect") {
     return next();
   }
 
@@ -32,7 +35,7 @@ function ensureAuthenticated(req: Request, res: Response, next: Next) {
     return next();
   }
 
-  res.redirect("/login");
+  next(new Error("Unauthorized"));
 }
 
 function handleError(err: Error, _req: Request, res: Response, _next: Next) {
