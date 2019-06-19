@@ -2,7 +2,7 @@ import format from "date-fns/format";
 import addDays from "date-fns/add_days";
 import isBefore from "date-fns/is_before";
 import isEqual from "date-fns/is_equal";
-import PageViewStream from "./database/PageViewStream";
+import PageViewStream from "../../src/server/db/models/PageViewStream";
 
 const paths = ["/", "/login", "/signup"];
 const referrers = ["", "https://www.google.com", "https://www.duckduckgo.com"];
