@@ -29,4 +29,5 @@ $ docker-compose up -d
 ```shell
 $ docker-compose -f docker-compose.yml up
 $ docker-compose run raylight npm run migrate
+$ docker-compose run raylight npm run seed
 ```
