@@ -32,7 +32,6 @@ function LoginForm() {
           <label>Password</label>
           <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)} />
         </Form.Field>
-
         <Button type="submit" color="green" onClick={() => handleSubmit(username, password, setError)}>
           Sign In
         </Button>

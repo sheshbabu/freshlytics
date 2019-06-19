@@ -1,6 +1,6 @@
 import PgClient from "../PgClient";
 
-type Row = {
+export type User = {
   id: string;
   name: string;
   password: string;
@@ -16,7 +16,17 @@ async function add(name: string, password: string) {
   await PgClient.query(statement, [name, password]);
 }
 
-async function getById(id: string): Promise<Row> {
+async function updatePassword(id: string, password: string) {
+  const statement = `
+    UPDATE Users
+    SET password = $2
+    WHERE id = $1
+  `;
+
+  await PgClient.query(statement, [id, password]);
+}
+
+async function getById(id: string): Promise<User> {
   const statement = `
     SELECT id, name, password
     FROM Users
@@ -27,7 +37,7 @@ async function getById(id: string): Promise<Row> {
   return result.rows[0];
 }
 
-async function getByName(name: string): Promise<Row> {
+async function getByName(name: string): Promise<User> {
   const statement = `
     SELECT id, name, password
     FROM Users
@@ -38,4 +48,4 @@ async function getByName(name: string): Promise<Row> {
   return result.rows[0];
 }
 
-export default { add, getById, getByName };
+export default { add, updatePassword, getById, getByName };

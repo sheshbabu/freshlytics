@@ -13,7 +13,7 @@ const router = express.Router();
 router.use("/collect", collect);
 
 router.use("/login", login);
-router.use("/password", changePassword);
+router.use("/changePassword", changePassword);
 
 router.use("/metric/pageview/path", getPathPageViewTotals);
 router.use("/metric/pageview/referrer", getReferrerPageViewTotals);
