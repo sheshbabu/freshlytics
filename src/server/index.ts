@@ -4,7 +4,7 @@ import compression from "compression";
 import bodyParser from "body-parser";
 import session from "express-session";
 import cors from "cors";
-import Database from "./database";
+import PgClient from "./db/PgClient";
 import router from "./router";
 
 const app = express();
@@ -44,6 +44,6 @@ function handleError(err: Error, _req: Request, res: Response, _next: Next) {
 }
 
 async function gracefullyExitProcess() {
-  await Database.close();
+  await PgClient.close();
   server.close(() => process.exit());
 }
