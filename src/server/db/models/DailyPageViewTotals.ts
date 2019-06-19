@@ -1,4 +1,4 @@
-import Database from ".";
+import PgClient from "../PgClient";
 
 type PageViewCount = {
   date: string;
@@ -21,7 +21,7 @@ async function getCount(projectId: string, startDate = "", endDate = ""): Promis
     ORDER BY date ASC
   `;
 
-  const result = await Database.query(statement, values);
+  const result = await PgClient.query(statement, values);
   return result.rows;
 }
 

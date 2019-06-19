@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
-import Users from "../database/Users";
+import Users from "../db/models/Users";
+import config from "../config";
 
 export default async function login(req: Request, res: Response, next: NextFunction) {
   try {
@@ -23,7 +24,7 @@ export default async function login(req: Request, res: Response, next: NextFunct
 
     let shouldForcePasswordChange = false;
 
-    if (req.body.password === "hunter2") {
+    if (req.body.password === config.defaultPassword) {
       shouldForcePasswordChange = true;
     }
 

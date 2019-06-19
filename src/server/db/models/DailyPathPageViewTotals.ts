@@ -1,4 +1,4 @@
-import Database from ".";
+import PgClient from "../PgClient";
 
 type Row = {
   name: string;
@@ -21,7 +21,7 @@ async function getPathTotals(projectId: string, startDate = "", endDate = ""): P
     GROUP BY path
     LIMIT 20
   `;
-  const result = await Database.query(statement, values);
+  const result = await PgClient.query(statement, values);
   return result.rows;
 }
 

@@ -1,7 +1,7 @@
 -- up migration
 
 CREATE TABLE Users (
-  id text,
+  id SERIAL,
   name text,
   password text
 );

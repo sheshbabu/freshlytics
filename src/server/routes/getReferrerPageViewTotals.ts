@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction as Next } from "express";
-import DailyReferrerPageViewTotals from "../database/DailyReferrerPageViewTotals";
+import DailyReferrerPageViewTotals from "../db/models/DailyReferrerPageViewTotals";
 
 async function getReferrerPageViewTotals(req: Request, res: Response, next: Next) {
   const projectId = req.query.projectId;

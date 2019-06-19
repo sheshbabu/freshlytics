@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction as Next } from "express";
-import PageViewStream from "../database/PageViewStream";
+import PageViewStream from "../db/models/PageViewStream";
 import DateTimeUtil from "../utils/DateTimeUtil";
 import UserAgentUtil from "../utils/UserAgentUtil";
 import { PageViewEventPayload, PageViewEvent } from "../types/PageViewEvent";

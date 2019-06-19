@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction as Next } from "express";
-import DailyBrowserNameVersionPageViewTotals from "../database/DailyBrowserNameVersionPageViewTotals";
+import DailyBrowserNameVersionPageViewTotals from "../db/models/DailyBrowserNameVersionPageViewTotals";
 
 async function getBrowserNameVersionPageViewTotals(req: Request, res: Response, next: Next) {
   const projectId = req.query.projectId;

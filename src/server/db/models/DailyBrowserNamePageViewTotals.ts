@@ -1,4 +1,4 @@
-import Database from ".";
+import PgClient from "../PgClient";
 
 type Row = {
   name: string;
@@ -21,7 +21,7 @@ async function getBrowserNameTotals(projectId: string, startDate = "", endDate =
     GROUP BY browserName
     LIMIT 5
   `;
-  const result = await Database.query(statement, values);
+  const result = await PgClient.query(statement, values);
   return result.rows;
 }
 
