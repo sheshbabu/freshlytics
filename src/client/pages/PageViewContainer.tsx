@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Divider } from "semantic-ui-react";
 import Titlebar from "../components/Titlebar";
-import Chart, { PageViewCount } from "../components/Chart";
+import Chart, { PageViewsByDateRow } from "../components/Chart";
 import MetricsTable, { Row } from "../components/MetricsTable";
 import Spinner from "../components/Spinner";
 import NoResults from "../components/NoResults";
@@ -10,7 +10,7 @@ import request from "../request";
 const DEFAULT_PROJECT_ID = 1000;
 
 type State = {
-  pageViewTotals: PageViewCount[] | null;
+  pageViewTotals: PageViewsByDateRow[] | null;
   pageViewsByPath: Array<Row> | null;
   pageViewsByReferrer: Array<Row> | null;
   pageViewsByBrowserName: Array<Row> | null;
@@ -36,11 +36,11 @@ export default class PageViewContainer extends React.Component {
 
   async makeRequests() {
     const results = await Promise.all([
-      this.makeRequest("/api/metric/pageview"),
-      this.makeRequest("/api/metric/pageview/path"),
-      this.makeRequest("/api/metric/pageview/referrer"),
-      this.makeRequest("/api/metric/pageview/browserName"),
-      this.makeRequest("/api/metric/pageview/browserNameVersion")
+      this.makeRequest("/api/events/pageviews"),
+      this.makeRequest("/api/events/pageviews", "path"),
+      this.makeRequest("/api/events/pageviews", "referrer"),
+      this.makeRequest("/api/events/pageviews", "browserName"),
+      this.makeRequest("/api/events/pageviews", "browserNameVersion")
     ]);
 
     this.setState({
@@ -53,7 +53,7 @@ export default class PageViewContainer extends React.Component {
     });
   }
 
-  async makeRequest(path: string) {
+  async makeRequest(path: string, dimension?: string) {
     const projectId = DEFAULT_PROJECT_ID;
     const startDate = this.state.dateRange.split(" - ")[0];
     const endDate = this.state.dateRange.split(" - ")[1];
@@ -62,6 +62,10 @@ export default class PageViewContainer extends React.Component {
 
     if (startDate !== "" && endDate !== "") {
       path = `${path}&startDate=${startDate}&endDate=${endDate}`;
+    }
+
+    if (dimension) {
+      path = `${path}&dimension=${dimension}`;
     }
 
     return await request(path);

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction as Next } from "express";
-import PageViewStream from "../db/models/PageViewStream";
+import PageViews from "../db/models/PageViews";
 import DateTimeUtil from "../utils/DateTimeUtil";
 import UserAgentUtil from "../utils/UserAgentUtil";
 import { PageViewEventPayload, PageViewEvent } from "../types/PageViewEvent";
@@ -7,7 +7,7 @@ import { PageViewEventPayload, PageViewEvent } from "../types/PageViewEvent";
 async function collect(req: Request, res: Response, next: Next) {
   try {
     const event = mapRequestPayload(req);
-    await PageViewStream.insert(event);
+    await PageViews.add(event);
     res.sendStatus(200);
   } catch (e) {
     next(e);

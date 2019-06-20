@@ -16,7 +16,7 @@
     "migrate": "node-pg-migrate -m ./src/server/db/migrations -j sql up",
     "migrate:create": "node-pg-migrate -m ./src/server/db/migrations -j sql create",
     "seed": "ts-node ./src/server/db/seed.ts",
-    "seed:test": "ts-node ./tests/fixtures/PageViewStream.fixture.ts",
+    "seed:test": "ts-node ./tests/fixtures/PageViews.fixture.ts",
     "lint": "eslint --ext .ts,.tsx .",
     "test:load": "artillery run ./tests/load/artillery.yml",
     "precommit": "lint-staged"

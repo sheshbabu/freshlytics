@@ -3,13 +3,13 @@ import format from "date-fns/format";
 import { Segment } from "semantic-ui-react";
 import FrappeChartWrapper from "./FrappeChartWrapper";
 
-export type PageViewCount = {
+export type PageViewsByDateRow = {
   date: string;
   total: string;
 };
 
 type Props = {
-  pageViews: PageViewCount[] | null;
+  pageViews: PageViewsByDateRow[] | null;
 };
 
 export default function Chart(props: Props) {
