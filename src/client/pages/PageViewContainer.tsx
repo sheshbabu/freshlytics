@@ -20,6 +20,7 @@ type State = {
   pageViewTotals: PageViewsByDateRow[] | null;
   pageViewsByDimension: Array<Row> | null;
   selectedDimension: string;
+  currentPage: number;
   dateRange: string;
   isLoading: boolean;
 };
@@ -29,6 +30,7 @@ export default class PageViewContainer extends React.Component {
     pageViewTotals: null,
     pageViewsByDimension: null,
     selectedDimension: DIMENSIONS[0].value,
+    currentPage: 0,
     dateRange: "",
     isLoading: true
   };
@@ -40,7 +42,7 @@ export default class PageViewContainer extends React.Component {
   async makeRequests() {
     const results = await Promise.all([
       this.makeRequest("/api/events/pageviews"),
-      this.makeRequest("/api/events/pageviews", this.state.selectedDimension)
+      this.makeRequest("/api/events/pageviews", this.state.selectedDimension, this.state.currentPage)
     ]);
 
     this.setState({
@@ -50,7 +52,7 @@ export default class PageViewContainer extends React.Component {
     });
   }
 
-  async makeRequest(path: string, dimension?: string) {
+  async makeRequest(path: string, dimension?: string, page?: number) {
     const projectId = DEFAULT_PROJECT_ID;
     const startDate = this.state.dateRange.split(" - ")[0];
     const endDate = this.state.dateRange.split(" - ")[1];
@@ -65,6 +67,10 @@ export default class PageViewContainer extends React.Component {
       path = `${path}&dimension=${dimension}`;
     }
 
+    if (page) {
+      path = `${path}&page=${page}`;
+    }
+
     return await request(path);
   }
 
@@ -73,11 +79,15 @@ export default class PageViewContainer extends React.Component {
     const startDate = dateRange.split(" - ")[0];
     const endDate = dateRange.split(" - ")[1];
 
-    this.setState({ dateRange }, () => startDate !== "" && endDate !== "" && this.makeRequests());
+    this.setState({ dateRange, currentPage: 0 }, () => startDate !== "" && endDate !== "" && this.makeRequests());
   };
 
   handleDimensionChange = (_event: React.SyntheticEvent, data: any) => {
-    this.setState({ selectedDimension: data.value }, this.makeRequests);
+    this.setState({ selectedDimension: data.value, currentPage: 0 }, this.makeRequests);
+  };
+
+  handlePageChange = (_event: React.SyntheticEvent, data: any) => {
+    this.setState({ currentPage: data.activePage - 1 }, this.makeRequests);
   };
 
   render() {
@@ -97,9 +107,11 @@ export default class PageViewContainer extends React.Component {
           <Divider hidden />
           <MetricsTable
             dimensions={DIMENSIONS}
+            currentPage={this.state.currentPage}
             selectedDimension={this.state.selectedDimension}
             rows={pageViewsByDimension}
             onDimensionChange={this.handleDimensionChange}
+            onPageChange={this.handlePageChange}
           />
           <Divider hidden />
         </>

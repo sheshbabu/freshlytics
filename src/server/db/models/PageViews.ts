@@ -30,7 +30,7 @@ async function getByDate(projectId: string, startDate: string, endDate: string) 
 
 async function getByPath(projectId: string, startDate: string, endDate: string, page: number) {
   const statement = `
-    SELECT path as name, SUM(total) as total
+    SELECT path as name, SUM(total) as total, count(*) OVER() AS totalRows
     FROM PageViewsByPath
     WHERE projectId = $1 AND date BETWEEN $2 AND $3
     GROUP BY path
@@ -44,7 +44,7 @@ async function getByPath(projectId: string, startDate: string, endDate: string, 
 
 async function getByReferrer(projectId: string, startDate: string, endDate: string, page: number) {
   const statement = `
-    SELECT referrer as name, SUM(total) as total
+    SELECT referrer as name, SUM(total) as total, count(*) OVER() AS totalRows
     FROM PageViewsByReferrer
     WHERE projectId = $1 AND date BETWEEN $2 AND $3
     GROUP BY referrer
@@ -58,7 +58,7 @@ async function getByReferrer(projectId: string, startDate: string, endDate: stri
 
 async function getByBrowserName(projectId: string, startDate: string, endDate: string, page: number) {
   const statement = `
-    SELECT browserName as name, SUM(total) as total
+    SELECT browserName as name, SUM(total) as total, count(*) OVER() AS totalRows
     FROM PageViewsByBrowserName
     WHERE projectId = $1 AND date BETWEEN $2 AND $3
     GROUP BY browserName
@@ -72,7 +72,7 @@ async function getByBrowserName(projectId: string, startDate: string, endDate: s
 
 async function getByBrowserNameVersion(projectId: string, startDate: string, endDate: string, page: number) {
   const statement = `
-    SELECT browserNameVersion as name, SUM(total) as total
+    SELECT browserNameVersion as name, SUM(total) as total, count(*) OVER() AS totalRows
     FROM PageViewsByBrowserNameVersion
     WHERE projectId = $1 AND date BETWEEN $2 AND $3
     GROUP BY browserNameVersion
