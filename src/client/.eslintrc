@@ -8,6 +8,11 @@
     "browser": true,
     "node": true
   },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "extends": ["plugin:react/recommended"],
   "plugins": ["react"]
 }
