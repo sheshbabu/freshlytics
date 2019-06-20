@@ -9,12 +9,17 @@ import request from "../request";
 
 const DEFAULT_PROJECT_ID = 1000;
 
+const DIMENSIONS = [
+  { text: "Path", value: "path" },
+  { text: "Referrers", value: "referrer" },
+  { text: "Browsers", value: "browserName" },
+  { text: "Browser Versions", value: "browserNameVersion" }
+];
+
 type State = {
   pageViewTotals: PageViewsByDateRow[] | null;
-  pageViewsByPath: Array<Row> | null;
-  pageViewsByReferrer: Array<Row> | null;
-  pageViewsByBrowserName: Array<Row> | null;
-  pageViewsByBrowserNameVersion: Array<Row> | null;
+  pageViewsByDimension: Array<Row> | null;
+  selectedDimension: string;
   dateRange: string;
   isLoading: boolean;
 };
@@ -22,10 +27,8 @@ type State = {
 export default class PageViewContainer extends React.Component {
   state: State = {
     pageViewTotals: null,
-    pageViewsByPath: null,
-    pageViewsByReferrer: null,
-    pageViewsByBrowserName: null,
-    pageViewsByBrowserNameVersion: null,
+    pageViewsByDimension: null,
+    selectedDimension: DIMENSIONS[0].value,
     dateRange: "",
     isLoading: true
   };
@@ -37,18 +40,12 @@ export default class PageViewContainer extends React.Component {
   async makeRequests() {
     const results = await Promise.all([
       this.makeRequest("/api/events/pageviews"),
-      this.makeRequest("/api/events/pageviews", "path"),
-      this.makeRequest("/api/events/pageviews", "referrer"),
-      this.makeRequest("/api/events/pageviews", "browserName"),
-      this.makeRequest("/api/events/pageviews", "browserNameVersion")
+      this.makeRequest("/api/events/pageviews", this.state.selectedDimension)
     ]);
 
     this.setState({
       pageViewTotals: results[0],
-      pageViewsByPath: results[1],
-      pageViewsByReferrer: results[2],
-      pageViewsByBrowserName: results[3],
-      pageViewsByBrowserNameVersion: results[4],
+      pageViewsByDimension: results[1],
       isLoading: false
     });
   }
@@ -79,16 +76,12 @@ export default class PageViewContainer extends React.Component {
     this.setState({ dateRange }, () => startDate !== "" && endDate !== "" && this.makeRequests());
   };
 
+  handleDimensionChange = (_event: React.SyntheticEvent, data: any) => {
+    this.setState({ selectedDimension: data.value }, this.makeRequests);
+  };
+
   render() {
-    const {
-      pageViewTotals,
-      pageViewsByPath,
-      pageViewsByReferrer,
-      pageViewsByBrowserName,
-      pageViewsByBrowserNameVersion,
-      dateRange,
-      isLoading
-    } = this.state;
+    const { pageViewTotals, pageViewsByDimension, dateRange, isLoading } = this.state;
 
     let content = <NoResults />;
 
@@ -102,13 +95,12 @@ export default class PageViewContainer extends React.Component {
           <Divider hidden />
           <Chart pageViews={pageViewTotals} />
           <Divider hidden />
-          <MetricsTable columnName="Pages" rows={pageViewsByPath} />
-          <Divider hidden />
-          <MetricsTable columnName="Referrers" rows={pageViewsByReferrer} />
-          <Divider hidden />
-          <MetricsTable columnName="Browsers" rows={pageViewsByBrowserName} />
-          <Divider hidden />
-          <MetricsTable columnName="Browser Versions" rows={pageViewsByBrowserNameVersion} />
+          <MetricsTable
+            dimensions={DIMENSIONS}
+            selectedDimension={this.state.selectedDimension}
+            rows={pageViewsByDimension}
+            onDimensionChange={this.handleDimensionChange}
+          />
           <Divider hidden />
         </>
       );

@@ -1,9 +1,11 @@
 import React from "react";
-import { Table } from "semantic-ui-react";
+import { Dropdown, DropdownProps, Table } from "semantic-ui-react";
 
 type Props = {
-  columnName: string;
+  dimensions: Array<{ text: string; value: string }>;
+  selectedDimension: string;
   rows: Array<Row> | null;
+  onDimensionChange: (event: React.SyntheticEvent<HTMLElement, Event>, data: DropdownProps) => void;
 };
 
 export type Row = {
@@ -30,7 +32,14 @@ function MetricsTableHeader(props: Props) {
   return (
     <Table.Header>
       <Table.Row>
-        <Table.HeaderCell width={9}>{props.columnName}</Table.HeaderCell>
+        <Table.HeaderCell width={9}>
+          <Dropdown
+            inline
+            options={props.dimensions}
+            defaultValue={props.selectedDimension}
+            onChange={props.onDimensionChange}
+          />
+        </Table.HeaderCell>
         <Table.HeaderCell width={1} textAlign="right">
           Total Page Views
         </Table.HeaderCell>
