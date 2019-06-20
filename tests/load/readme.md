@@ -1,11 +1,6 @@
 # Load testing
 
-Start the container and migrate db
-
-```shell
-$ docker-compose -f docker-compose.yml up
-$ docker-compose run raylight npm run migrate
-```
+Follow project readme to setup local environment
 
 Start load test
 
