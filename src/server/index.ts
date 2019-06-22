@@ -15,7 +15,14 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(compression());
 app.use(bodyParser.json());
-app.use(session({ secret: "raylight", resave: false, saveUninitialized: true }));
+app.use(
+  session({
+    store: PgClient.getSessionStore(session),
+    secret: "raylight",
+    resave: false,
+    saveUninitialized: true
+  })
+);
 app.use(express.static(path.resolve(__dirname, "./client")));
 app.use("/api", ensureAuthenticated, router);
 app.use(handleError);
