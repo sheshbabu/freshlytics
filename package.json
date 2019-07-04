@@ -38,7 +38,6 @@
   "dependencies": {
     "bcrypt": "3.0.6",
     "body-parser": "1.19.0",
-    "chrome-launcher": "0.10.7",
     "compression": "1.7.4",
     "connect-pg-simple": "5.0.0",
     "cors": "2.8.5",
@@ -46,7 +45,6 @@
     "express": "4.17.0",
     "express-session": "1.16.2",
     "frappe-charts": "1.1.0",
-    "lighthouse": "5.0.0",
     "node-pg-migrate": "3.20.0",
     "pg": "7.11.0",
     "react": "16.8.6",
