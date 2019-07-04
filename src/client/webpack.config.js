@@ -19,7 +19,8 @@ const config = {
   entry: "./src/client/index.tsx",
 
   output: {
-    path: path.resolve(__dirname, "../../dist/client")
+    path: path.resolve(__dirname, "../../dist/client"),
+    publicPath: "/"
   },
 
   resolve: {
