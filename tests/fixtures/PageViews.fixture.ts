@@ -2,7 +2,7 @@ import format from "date-fns/format";
 import addDays from "date-fns/add_days";
 import isBefore from "date-fns/is_before";
 import isEqual from "date-fns/is_equal";
-import PageViews from "../../src/server/db/models/PageViews";
+import PageViews from "../../src/server/models/PageViews";
 
 const paths = [
   "/",

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import PageViews from "../db/models/PageViews";
+import PageViews from "../models/PageViews";
 
 async function getPageViews(req: Request, res: Response, next: NextFunction) {
   const projectId = req.query.projectId;

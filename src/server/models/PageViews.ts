@@ -1,5 +1,5 @@
-import PgClient from "../PgClient";
-import { PageViewEvent } from "../../types/PageViewEvent";
+import Postgres from "../libs/Postgres";
+import { PageViewEvent } from "../types/PageViewEvent";
 
 async function add(event: PageViewEvent) {
   const { projectId, date, path, referrer, browserName, browserNameVersion } = event;
@@ -13,7 +13,7 @@ async function add(event: PageViewEvent) {
       browserNameVersion
     ) VALUES ($1, $2, $3, $4, $5, $6)
   `;
-  return PgClient.query(statement, [projectId, date, path, referrer, browserName, browserNameVersion]);
+  return Postgres.query(statement, [projectId, date, path, referrer, browserName, browserNameVersion]);
 }
 
 // "1900-01-01""3000-01-01"
@@ -24,7 +24,7 @@ async function getByDate(projectId: string, startDate: string, endDate: string) 
     WHERE projectId = $1 AND date BETWEEN $2 AND $3
     ORDER BY date ASC
   `;
-  const result = await PgClient.query(statement, [projectId, startDate, endDate]);
+  const result = await Postgres.query(statement, [projectId, startDate, endDate]);
   return result.rows;
 }
 
@@ -38,7 +38,7 @@ async function getByPath(projectId: string, startDate: string, endDate: string, 
     LIMIT 10
     OFFSET $4 * 10
   `;
-  const result = await PgClient.query(statement, [projectId, startDate, endDate, page]);
+  const result = await Postgres.query(statement, [projectId, startDate, endDate, page]);
   return result.rows;
 }
 
@@ -52,7 +52,7 @@ async function getByReferrer(projectId: string, startDate: string, endDate: stri
     LIMIT 10
     OFFSET $4 * 10
   `;
-  const result = await PgClient.query(statement, [projectId, startDate, endDate, page]);
+  const result = await Postgres.query(statement, [projectId, startDate, endDate, page]);
   return result.rows;
 }
 
@@ -66,7 +66,7 @@ async function getByBrowserName(projectId: string, startDate: string, endDate: s
     LIMIT 10
     OFFSET $4 * 10
   `;
-  const result = await PgClient.query(statement, [projectId, startDate, endDate, page]);
+  const result = await Postgres.query(statement, [projectId, startDate, endDate, page]);
   return result.rows;
 }
 
@@ -80,7 +80,7 @@ async function getByBrowserNameVersion(projectId: string, startDate: string, end
     LIMIT 10
     OFFSET $4 * 10
   `;
-  const result = await PgClient.query(statement, [projectId, startDate, endDate, page]);
+  const result = await Postgres.query(statement, [projectId, startDate, endDate, page]);
   return result.rows;
 }
 

@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import Users from "./models/Users";
+import Users from "../models/Users";
 import config from "../config";
 
 async function addAdmin() {

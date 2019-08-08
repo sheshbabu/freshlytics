@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
-import Users, { User } from "../db/models/Users";
+import Users, { User } from "../models/Users";
 
 export default async function changePassword(req: Request, res: Response, next: NextFunction) {
   try {

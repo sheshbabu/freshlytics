@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
-import Users from "../db/models/Users";
+import Users from "../models/Users";
 import config from "../config";
 
 export default async function login(req: Request, res: Response, next: NextFunction) {
