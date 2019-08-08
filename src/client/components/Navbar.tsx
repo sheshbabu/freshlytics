@@ -4,7 +4,7 @@ import { Menu } from "semantic-ui-react";
 export default function Navbar() {
   return (
     <Menu>
-      <Menu.Item header>Raylight</Menu.Item>
+      <Menu.Item header>Freshlytics</Menu.Item>
     </Menu>
   );
 }

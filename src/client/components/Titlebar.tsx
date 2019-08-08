@@ -30,7 +30,7 @@ function PageHeader() {
 function DatePicker(props: Props) {
   return (
     <DatesRangeInput
-      name="raylight-date-input"
+      name="freshlytics-date-input"
       dateFormat="YYYY-MM-DD"
       placeholder="From - To"
       value={props.dateRange}

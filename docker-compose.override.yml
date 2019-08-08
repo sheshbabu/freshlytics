@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  raylight:
+  freshlytics:
     build:
       context: .
       dockerfile: Dockerfile.dev

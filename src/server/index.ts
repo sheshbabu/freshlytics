@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(
   session({
     store: Postgres.getSessionStore(session),
-    secret: "raylight",
+    secret: "freshlytics",
     resave: false,
     saveUninitialized: false,
     cookie: {

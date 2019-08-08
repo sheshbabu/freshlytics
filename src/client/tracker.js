@@ -1,7 +1,7 @@
 (function() {
   var COLLECT_URL = "/collect";
   var PROJECT_ID = 1000;
-  var GLOBAL_VAR_NAME = "__raylight__";
+  var GLOBAL_VAR_NAME = "__freshlytics__";
 
   window[GLOBAL_VAR_NAME] = {};
 
