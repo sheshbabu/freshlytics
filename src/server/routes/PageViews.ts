@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import PageViews from "../models/PageViews";
 
-async function getPageViews(req: Request, res: Response, next: NextFunction) {
+async function get(req: Request, res: Response, next: NextFunction) {
   const projectId = req.query.project_id;
   const startDate = req.query.start_date || "1900-01-01";
   const endDate = req.query.end_date || "3000-01-01";
@@ -34,4 +34,6 @@ async function getPageViews(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-export default getPageViews;
+export default {
+  get
+};

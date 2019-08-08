@@ -46,7 +46,7 @@ function ChangePasswordIllustration() {
 
 async function handleSubmit(oldPassword: string, newPassword: string, setError: Function) {
   try {
-    await request("/api/changePassword", "POST", { oldPassword, newPassword });
+    await request("/api/change_password", "POST", { oldPassword, newPassword });
     setError("");
     location.replace("/");
   } catch (e) {

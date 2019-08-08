@@ -2,7 +2,8 @@ import { Request, Response, NextFunction as Next } from "express";
 import PageViews from "../models/PageViews";
 import DateTimeUtil from "../utils/DateTimeUtil";
 import UserAgentUtil from "../utils/UserAgentUtil";
-import { PageViewEventPayload, PageViewEvent } from "../types/PageViewEvent";
+import { PageViewEvent } from "../types/PageViewEvent.type";
+import { PageViewEventPayload } from "../types/PageViewEventPayload.type";
 
 async function collect(req: Request, res: Response, next: Next) {
   try {
@@ -50,4 +51,6 @@ function validateRequestPayload(payload: PageViewEventPayload) {
   }
 }
 
-export default collect;
+export default {
+  collect
+};

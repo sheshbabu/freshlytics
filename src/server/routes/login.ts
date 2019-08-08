@@ -1,9 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
-import Users from "../models/Users";
 import config from "../config";
+import Users from "../models/Users";
+import { User } from "../types/User.type";
 
-export default async function login(req: Request, res: Response, next: NextFunction) {
+async function login(req: Request, res: Response, next: NextFunction) {
   try {
     const user = await Users.getByName(req.body.username);
 
@@ -33,3 +34,30 @@ export default async function login(req: Request, res: Response, next: NextFunct
     next(e);
   }
 }
+
+async function changePassword(req: Request, res: Response, next: NextFunction) {
+  try {
+    const user: User = req.session && req.session.user;
+    const { oldPassword, newPassword } = req.body;
+
+    if (user === undefined) {
+      throw new Error("Invalid user");
+    }
+
+    if (oldPassword === newPassword) {
+      throw new Error("New password same as old");
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await Users.updatePassword(user.id, hashedPassword);
+
+    res.status(200).send({});
+  } catch (e) {
+    next(e);
+  }
+}
+
+export default {
+  login,
+  changePassword
+};
