@@ -1,10 +1,5 @@
 import Postgres from "../libs/Postgres";
-
-export type User = {
-  id: string;
-  name: string;
-  password: string;
-};
+import { User } from "../types/User.type";
 
 async function add(name: string, password: string) {
   const statement = "INSERT INTO users (name, password) VALUES ($1, $2)";

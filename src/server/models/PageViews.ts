@@ -1,5 +1,5 @@
 import Postgres from "../libs/Postgres";
-import { PageViewEvent } from "../types/PageViewEvent";
+import { PageViewEvent } from "../types/PageViewEvent.type";
 
 async function add(event: PageViewEvent) {
   const { project_id, date, path, referrer, browser_name, browser_name_version } = event;
