@@ -12,6 +12,7 @@ export default async function request(path: string, method: string = "GET", body
   let responseBody: any = {};
 
   if (response.status === 401) {
+    localStorage.removeItem("isAuthenticated");
     location.replace("/login");
   }
 
