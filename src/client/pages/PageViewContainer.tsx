@@ -12,8 +12,8 @@ const DEFAULT_PROJECT_ID = 1000;
 const DIMENSIONS = [
   { text: "Path", value: "path" },
   { text: "Referrers", value: "referrer" },
-  { text: "Browsers", value: "browserName" },
-  { text: "Browser Versions", value: "browserNameVersion" }
+  { text: "Browsers", value: "browser_name" },
+  { text: "Browser Versions", value: "browser_name_version" }
 ];
 
 type State = {
@@ -57,10 +57,10 @@ export default class PageViewContainer extends React.Component {
     const startDate = this.state.dateRange.split(" - ")[0];
     const endDate = this.state.dateRange.split(" - ")[1];
 
-    path = `${path}?projectId=${projectId}`;
+    path = `${path}?project_id=${projectId}`;
 
     if (startDate !== "" && endDate !== "") {
-      path = `${path}&startDate=${startDate}&endDate=${endDate}`;
+      path = `${path}&start_date=${startDate}&end_date=${endDate}`;
     }
 
     if (dimension) {

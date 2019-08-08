@@ -82,12 +82,12 @@ while (isBefore(currDate, endDate) || isEqual(currDate, endDate)) {
   const eventCount = pickRandomNumber(200, 1000);
   for (let event = 1; event < eventCount; event++) {
     PageViews.add({
-      projectId: "1000",
+      project_id: "1000",
       date: format(currDate, "YYYY-MM-DD"),
       path: pickRandomItem(paths),
       referrer: pickRandomItem(referrers),
-      browserName: pickRandomItem(browserNames),
-      browserNameVersion: pickRandomItem(browserNameVersions)
+      browser_name: pickRandomItem(browserNames),
+      browser_name_version: pickRandomItem(browserNameVersions)
     });
   }
   currDate = addDays(currDate, 1);

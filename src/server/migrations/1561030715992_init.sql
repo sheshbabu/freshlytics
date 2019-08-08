@@ -18,37 +18,80 @@ ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFE
 
 -- for events
 
-CREATE FOREIGN TABLE PageViewStream (
-  projectId text,
-  date date,
-  path text,
-  referrer text,
-  browserName text,
-  browserNameVersion text
+CREATE FOREIGN TABLE "pageview_stream" (
+  "project_id" text,
+  "date" date,
+  "path" text,
+  "referrer" text,
+  "browser_name" text,
+  "browser_name_version" text
 ) SERVER pipelinedb;
 
-CREATE VIEW PageViewsByDate WITH (action=materialize) AS
-SELECT projectId, date, COUNT(*) AS total
-FROM PageViewStream
-GROUP BY projectId, date;
+CREATE VIEW "pageviews_by_date"
+  WITH (action=materialize) AS
+  SELECT
+    "project_id",
+    "date",
+    COUNT(*) AS "total"
+  FROM
+    "pageview_stream"
+  GROUP BY
+    "project_id",
+    "date";
 
-CREATE VIEW PageViewsByPath WITH (action=materialize) AS
-SELECT projectId, date, path, COUNT(*) AS total
-FROM PageViewStream
-GROUP BY projectId, date, path;
+CREATE VIEW "pageviews_by_path"
+  WITH (action=materialize) AS
+  SELECT
+    "project_id",
+    "date",
+    "path",
+    COUNT(*) AS "total"
+  FROM
+    "pageview_stream"
+  GROUP BY
+    "project_id",
+    "date",
+    "path";
 
-CREATE VIEW PageViewsByReferrer WITH (action=materialize) AS
-SELECT projectId, date, referrer, COUNT(*) AS total
-FROM PageViewStream
-GROUP BY projectId, date, referrer;
+CREATE VIEW "pageviews_by_referrer"
+  WITH (action=materialize) AS
+  SELECT
+    "project_id",
+    "date",
+    "referrer",
+    COUNT(*) AS "total"
+  FROM
+    "pageview_stream"
+  GROUP BY
+    "project_id",
+    "date",
+    "referrer";
 
-CREATE VIEW PageViewsByBrowserName WITH (action=materialize) AS
-SELECT projectId, date, browserName, COUNT(*) AS total
-FROM PageViewStream
-GROUP BY projectId, date, browserName;
+CREATE VIEW "pageviews_by_browsername"
+  WITH (action=materialize) AS
+  SELECT
+    "project_id",
+    "date",
+    "browser_name",
+    COUNT(*) AS "total"
+  FROM
+    "pageview_stream"
+  GROUP BY
+    "project_id",
+    "date",
+    "browser_name";
 
-CREATE VIEW PageViewsByBrowserNameVersion WITH (action=materialize) AS
-SELECT projectId, date, browserNameVersion, COUNT(*) AS total
-FROM PageViewStream
-GROUP BY projectId, date, browserNameVersion;
+CREATE VIEW "pageviews_by_browsernameversion"
+  WITH (action=materialize) AS
+  SELECT
+    "project_id",
+    "date",
+    "browser_name_version",
+    COUNT(*) AS "total"
+  FROM
+    "pageview_stream"
+  GROUP BY
+    "project_id",
+    "date",
+    "browser_name_version";
 

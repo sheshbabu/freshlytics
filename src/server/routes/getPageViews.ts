@@ -2,9 +2,9 @@ import { Request, Response, NextFunction } from "express";
 import PageViews from "../models/PageViews";
 
 async function getPageViews(req: Request, res: Response, next: NextFunction) {
-  const projectId = req.query.projectId;
-  const startDate = req.query.startDate || "1900-01-01";
-  const endDate = req.query.endDate || "3000-01-01";
+  const projectId = req.query.project_id;
+  const startDate = req.query.start_date || "1900-01-01";
+  const endDate = req.query.end_date || "3000-01-01";
   const page = req.query.page || 0;
   const dimension = req.query.dimension || null;
   let rows = [];
@@ -17,10 +17,10 @@ async function getPageViews(req: Request, res: Response, next: NextFunction) {
       case "referrer":
         rows = await PageViews.getByReferrer(projectId, startDate, endDate, page);
         break;
-      case "browserName":
+      case "browser_name":
         rows = await PageViews.getByBrowserName(projectId, startDate, endDate, page);
         break;
-      case "browserNameVersion":
+      case "browser_name_version":
         rows = await PageViews.getByBrowserNameVersion(projectId, startDate, endDate, page);
         break;
       default:

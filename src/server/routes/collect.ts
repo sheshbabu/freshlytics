@@ -16,7 +16,7 @@ async function collect(req: Request, res: Response, next: Next) {
 
 function mapRequestPayload(req: Request): PageViewEvent {
   const payload: PageViewEventPayload = {
-    projectId: req.query.projectId,
+    project_id: req.query.project_id,
     path: req.query.path,
     referrer: req.query.referrer,
     ua: req.headers["user-agent"] || ""
@@ -24,17 +24,17 @@ function mapRequestPayload(req: Request): PageViewEvent {
 
   validateRequestPayload(payload);
 
-  const { projectId, path, referrer, ua } = payload;
+  const { project_id, path, referrer, ua } = payload;
   const date = DateTimeUtil.getCurrentDateInUtc();
-  const browserName = UserAgentUtil.getBrowserName(ua);
-  const browserNameVersion = UserAgentUtil.getBrowserNameVersion(ua);
+  const browser_name = UserAgentUtil.getBrowserName(ua);
+  const browser_name_version = UserAgentUtil.getBrowserNameVersion(ua);
 
-  return { projectId, path, referrer, date, browserName, browserNameVersion };
+  return { project_id, path, referrer, date, browser_name, browser_name_version };
 }
 
 function validateRequestPayload(payload: PageViewEventPayload) {
-  if (typeof payload.projectId !== "string") {
-    throw new Error("projectId not sent");
+  if (typeof payload.project_id !== "string") {
+    throw new Error("project_id not sent");
   }
 
   if (typeof payload.path !== "string") {

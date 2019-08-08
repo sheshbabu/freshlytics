@@ -13,7 +13,7 @@ type Props = {
 export type Row = {
   name: string;
   total: string;
-  totalrows: string;
+  total_rows: string;
 };
 
 export default function MetricsTable(props: Props) {
@@ -94,5 +94,5 @@ function getTotalPage(props: Props) {
   }
 
   const LIMIT = 10;
-  return Math.ceil(parseInt(props.rows[0].totalrows) / LIMIT);
+  return Math.ceil(parseInt(props.rows[0].total_rows) / LIMIT);
 }

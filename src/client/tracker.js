@@ -11,7 +11,7 @@
 
     var url =
       COLLECT_URL +
-      "?projectId=" +
+      "?project_id=" +
       PROJECT_ID +
       "&path=" +
       encodeURIComponent(path) +
