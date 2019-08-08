@@ -1,9 +1,9 @@
 -- up migration
 
-CREATE TABLE Users (
-  id SERIAL,
-  name text,
-  password text
+CREATE TABLE "users" (
+  "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  "name" text,
+  "password" text
 );
 
 -- for session persistance using connect-pg-simple
