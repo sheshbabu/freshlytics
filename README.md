@@ -4,13 +4,11 @@
 
 ## Screenshots
 
+Home
 ![Screenshot](./docs/home.png)
 
-<p align="center">Home</p>
-
+Login
 ![Screenshot](./docs/login.png)
-
-<p align="center">Login</p>
 
 ## Local development
 
