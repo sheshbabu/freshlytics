@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Form, Header, Message } from "semantic-ui-react";
-import request from "../request";
+import request from "../libs/request";
 import styles from "./LoginContainer.css";
 
 export default function LoginContainer() {
@@ -46,7 +46,7 @@ function LoginIllustration() {
 
 async function handleSubmit(username: string, password: string, setError: Function) {
   try {
-    const response = await request("/api/login", "POST", JSON.stringify({ username, password }));
+    const response = await request("/api/login", "POST", { username, password });
     localStorage.setItem("isAuthenticated", "true");
     setError("");
 

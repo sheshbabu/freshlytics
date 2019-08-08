@@ -5,7 +5,7 @@ import Chart, { PageViewsByDateRow } from "../components/Chart";
 import MetricsTable, { Row } from "../components/MetricsTable";
 import Spinner from "../components/Spinner";
 import NoResults from "../components/NoResults";
-import request from "../request";
+import request from "../libs/request";
 
 const DEFAULT_PROJECT_ID = 1000;
 

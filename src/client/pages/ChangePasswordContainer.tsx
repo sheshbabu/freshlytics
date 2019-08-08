@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Form, Header, Message } from "semantic-ui-react";
-import request from "../request";
+import request from "../libs/request";
 import styles from "./ChangePasswordContainer.css";
 
 export default function ChangePasswordContainer() {
@@ -46,7 +46,7 @@ function ChangePasswordIllustration() {
 
 async function handleSubmit(oldPassword: string, newPassword: string, setError: Function) {
   try {
-    const response = await request("/api/changePassword", "POST", JSON.stringify({ oldPassword, newPassword }));
+    await request("/api/changePassword", "POST", { oldPassword, newPassword });
     setError("");
     location.replace("/");
   } catch (e) {
