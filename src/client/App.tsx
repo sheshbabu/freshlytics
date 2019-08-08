@@ -14,12 +14,8 @@ export default function App() {
   );
 }
 
-function PrivateRoute(props: any) {
+function PrivateRoute({ component: Component, ...rest }: any) {
   const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
 
-  if (isAuthenticated) {
-    return <Route {...props} />;
-  } else {
-    return <Redirect to={{ pathname: "/login" }} />;
-  }
+  return <Route {...rest} render={props => (isAuthenticated ? <Component {...props} /> : <Redirect to="/login" />)} />;
 }
