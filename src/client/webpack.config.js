@@ -3,17 +3,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const config = {
-  devServer: {
-    quiet: true,
-    overlay: true,
-    historyApiFallback: true,
-    host: "0.0.0.0",
-    port: 3000,
-    proxy: {
-      "/api": "http://localhost:3001"
-    }
-  },
-
   target: "web",
 
   entry: "./src/client/index.tsx",

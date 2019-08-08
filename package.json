@@ -10,12 +10,12 @@
     "dev": "npm run dev:server & npm run dev:client",
     "build": "rm -rf ./dist && npm run build:server && npm run build:client",
     "dev:server": "nodemon -q -e ts -w ./src/server -x ts-node ./src/server/index.ts",
-    "dev:client": "webpack-dev-server --mode=development --config ./src/client/webpack.config.js",
+    "dev:client": "webpack --mode=development -w --config ./src/client/webpack.config.js",
     "build:server": "tsc --build ./src/server/tsconfig.server.json",
     "build:client": "webpack --mode=production --progress --profile --config ./src/client/webpack.config.js",
-    "migrate": "node-pg-migrate -m ./src/server/db/migrations -j sql up",
-    "migrate:create": "node-pg-migrate -m ./src/server/db/migrations -j sql create",
-    "seed": "ts-node ./src/server/db/seed.ts",
+    "migrate": "node-pg-migrate -m ./src/server/migrations -j sql up",
+    "migrate:create": "node-pg-migrate -m ./src/server/migrations -j sql create",
+    "seed": "ts-node ./src/server/seeds",
     "seed:test": "ts-node ./tests/fixtures/PageViews.fixture.ts",
     "lint": "eslint --ext .ts,.tsx .",
     "test:load": "artillery run ./tests/load/artillery.yml",
@@ -91,6 +91,5 @@
     "webpack": "4.32.2",
     "webpack-cli": "3.3.2",
     "webpack-dev-server": "3.4.1"
-  },
-  "proxy": "http://localhost:3001"
+  }
 }
