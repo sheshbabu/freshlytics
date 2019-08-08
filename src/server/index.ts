@@ -1,30 +1,31 @@
 import path from "path";
-import express, { Request, Response, NextFunction as Next } from "express";
+import express, { Request, Response, NextFunction } from "express";
 import compression from "compression";
 import bodyParser from "body-parser";
 import session from "express-session";
-import cors from "cors";
-import PgClient from "./db/PgClient";
-import router from "./router";
+import Postgres from "./libs/Postgres";
+import router from "./routes";
+
+const ASSET_PATH = process.env.NODE_ENV === "development" ? "../../dist/client" : "./client";
 
 const app = express();
-
-if (process.env.NODE_ENV === "development") {
-  app.use(cors({ origin: "http://localhost:3000", credentials: true }));
-}
 
 app.use(compression());
 app.use(bodyParser.json());
 app.use(
   session({
-    store: PgClient.getSessionStore(session),
+    store: Postgres.getSessionStore(session),
     secret: "raylight",
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 * 365 * 10 // 10 Years
+    }
   })
 );
-app.use(express.static(path.resolve(__dirname, "./client")));
-app.use("/api", ensureAuthenticated, router);
+app.use("/api", router);
+app.use(express.static(path.resolve(__dirname, ASSET_PATH)));
+app.use("*", express.static(path.resolve(__dirname, ASSET_PATH)));
 app.use(handleError);
 
 const server = app.listen(3001);
@@ -33,24 +34,20 @@ process.on("uncaughtException", gracefullyExitProcess);
 process.on("unhandledRejection", gracefullyExitProcess);
 process.on("SIGINT", gracefullyExitProcess);
 
-function ensureAuthenticated(req: Request, res: Response, next: Next) {
-  if (req.path === "/login" || req.path === "/collect") {
-    return next();
-  }
-
-  if (req.session && req.session.user && req.session.user.isAuthenticated) {
-    return next();
-  }
-
-  next(new Error("Unauthorized"));
-}
-
-function handleError(err: Error, _req: Request, res: Response, _next: Next) {
+function handleError(err: Error, _req: Request, res: Response, _next: NextFunction) {
   const message = err.message || "Something went wrong!";
-  res.status(500).send({ message });
+  let code = 500;
+
+  if (err.name === "UnauthorizedError") {
+    code = 403;
+  } else if (err.name === "UnauthenticatedError") {
+    code = 401;
+  }
+
+  res.status(code).send({ message });
 }
 
 async function gracefullyExitProcess() {
-  await PgClient.close();
+  await Postgres.close();
   server.close(() => process.exit());
 }
