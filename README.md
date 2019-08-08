@@ -1,6 +1,6 @@
-# Freshlytics
+<p align="center"><img src="https://raw.githubusercontent.com/sheshbabu/freshlytics/master/docs/title.png" /></p>
 
-Open source privacy-friendly analytics
+<p align="center">Open source privacy-friendly analytics</p>
 
 ## Screenshots
 
