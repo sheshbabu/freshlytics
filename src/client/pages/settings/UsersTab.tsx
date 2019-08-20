@@ -1,20 +1,40 @@
 import React from "react";
 import { Button, Table } from "semantic-ui-react";
+import UserModal, { Mode } from "./UserModal";
 import styles from "./SettingsPage.css";
 
+type ButtonRowProps = {
+  onAddClick: () => void;
+};
+
 export default function UsersTab() {
+  const [modalMode, setModalMode] = React.useState<Mode>("add");
+  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
+
+  function handleAddClick() {
+    setModalMode("add");
+    setIsModalOpen(true);
+  }
+
+  function handleModalClose() {
+    setIsModalOpen(false);
+  }
+
   return (
     <div className={styles.tab_container}>
-      <ButtonRow />
+      <ButtonRow onAddClick={handleAddClick} />
       <ProjectsTable />
+      <UserModal isOpen={isModalOpen} mode={modalMode} onClose={handleModalClose} />
     </div>
   );
 }
 
-function ButtonRow() {
+function ButtonRow(props: ButtonRowProps) {
   return (
     <div className={styles.button_row}>
-      <Button color="green">Add User</Button>
+      <Button color="green" onClick={props.onAddClick}>
+        Add User
+      </Button>
     </div>
   );
 }
