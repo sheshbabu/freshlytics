@@ -1,0 +1,10 @@
+.header {
+  font-style: italic;
+}
+
+.header,
+.header:hover,
+.link,
+.link:hover {
+  color: rgba(0, 0, 0, 0.87);
+}
