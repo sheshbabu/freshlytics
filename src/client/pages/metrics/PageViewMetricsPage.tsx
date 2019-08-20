@@ -1,11 +1,12 @@
 import React from "react";
 import { Container, Divider } from "semantic-ui-react";
-import Titlebar from "../components/Titlebar";
-import Chart, { PageViewsByDateRow } from "../components/Chart";
-import MetricsTable, { Row } from "../components/MetricsTable";
-import Spinner from "../components/Spinner";
-import NoResults from "../components/NoResults";
-import request from "../libs/request";
+import Navbar from "../../components/Navbar";
+import Titlebar from "../../components/Titlebar";
+import Chart, { PageViewsByDateRow } from "../../components/Chart";
+import MetricsTable, { Row } from "../../components/MetricsTable";
+import Spinner from "../../components/Spinner";
+import NoResults from "../../components/NoResults";
+import request from "../../libs/request";
 
 const DEFAULT_PROJECT_ID = 1000;
 
@@ -25,7 +26,7 @@ type State = {
   isLoading: boolean;
 };
 
-export default class PageViewContainer extends React.Component {
+export default class PageViewMetricsPage extends React.Component {
   state: State = {
     pageViewTotals: null,
     pageViewsByDimension: null,
@@ -120,8 +121,9 @@ export default class PageViewContainer extends React.Component {
 
     return (
       <Container text>
+        <Navbar />
         <Divider hidden />
-        <Titlebar dateRange={dateRange} onDateChange={this.handleDateChange} />
+        <Titlebar pageName="Page Views" dateRange={dateRange} onDateChange={this.handleDateChange} />
         {content}
       </Container>
     );

@@ -1,15 +1,17 @@
 import React from "react";
 import { BrowserRouter, Route, Redirect } from "react-router-dom";
-import PageViewContainer from "./pages/PageViewContainer";
-import LoginContainer from "./pages/LoginContainer";
-import ChangePasswordContainer from "./pages/ChangePasswordContainer";
+import LoginPage from "./pages/login/LoginPage";
+import ChangePasswordPage from "./pages/login/ChangePasswordPage";
+import PageViewMetricsPage from "./pages/metrics/PageViewMetricsPage";
+import SettingsPage from "./pages/settings/SettingsPage";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <PrivateRoute path="/" exact component={PageViewContainer} />
-      <Route path="/login" component={LoginContainer} />
-      <PrivateRoute path="/password" component={ChangePasswordContainer} />
+      <Route path="/login" component={LoginPage} />
+      <PrivateRoute path="/password" component={ChangePasswordPage} />
+      <PrivateRoute path="/" exact component={PageViewMetricsPage} />
+      <PrivateRoute path="/settings" exact component={SettingsPage} />
     </BrowserRouter>
   );
 }

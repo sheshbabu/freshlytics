@@ -1,9 +1,9 @@
 import React from "react";
 import { Button, Form, Header, Message } from "semantic-ui-react";
-import request from "../libs/request";
-import styles from "./ChangePasswordContainer.css";
+import request from "../../libs/request";
+import styles from "./ChangePasswordPage.css";
 
-export default function ChangePasswordContainer() {
+export default function ChangePasswordPage() {
   return (
     <div className={styles.container}>
       <ChangePasswordIllustration />

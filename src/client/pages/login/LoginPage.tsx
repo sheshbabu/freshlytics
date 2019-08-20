@@ -1,9 +1,9 @@
 import React from "react";
 import { Button, Form, Header, Message } from "semantic-ui-react";
-import request from "../libs/request";
-import styles from "./LoginContainer.css";
+import request from "../../libs/request";
+import styles from "./LoginPage.css";
 
-export default function LoginContainer() {
+export default function LoginPage() {
   return (
     <div className={styles.container}>
       <LoginIllustration />
