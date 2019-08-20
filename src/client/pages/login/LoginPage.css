@@ -11,7 +11,7 @@
 }
 
 .illustration {
-  background: url("../assets/login.png");
+  background: url("../../assets/login.png");
   background-size: cover;
   width: 50%;
   height: 500px;

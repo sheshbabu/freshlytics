@@ -11,7 +11,7 @@ export default function App() {
       <Route path="/login" component={LoginPage} />
       <PrivateRoute path="/password" component={ChangePasswordPage} />
       <PrivateRoute path="/" exact component={PageViewMetricsPage} />
-      <PrivateRoute path="/settings" exact component={SettingsPage} />
+      <PrivateRoute path="/settings" component={SettingsPage} />
     </BrowserRouter>
   );
 }
