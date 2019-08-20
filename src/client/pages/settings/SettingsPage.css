@@ -1,0 +1,8 @@
+.tab_container {
+  min-height: 500px;
+}
+
+.button_row {
+  display: flex;
+  flex-direction: row-reverse;
+}
