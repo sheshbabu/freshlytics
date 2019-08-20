@@ -1,11 +1,12 @@
 import React from "react";
-import { Header, Divider } from "semantic-ui-react";
 import { DatesRangeInput } from "semantic-ui-calendar-react";
+import PageHeader from "./PageHeader";
 import styles from "./Titlebar.css";
 
 type DateChangeFunction = (e: React.SyntheticEvent<HTMLElement, Event>, data: any) => void;
 
 type Props = {
+  pageName: string;
   dateRange: string;
   onDateChange: DateChangeFunction;
 };
@@ -13,17 +14,9 @@ type Props = {
 export default function Titlebar(props: Props) {
   return (
     <div className={styles.container}>
-      <PageHeader />
+      <PageHeader name={props.pageName} />
       <DatePicker {...props} />
     </div>
-  );
-}
-
-function PageHeader() {
-  return (
-    <Header size="huge" style={{ margin: 0 }}>
-      Page Views
-    </Header>
   );
 }
 
