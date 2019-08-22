@@ -1,5 +1,13 @@
-.container {
+.full_height {
   height: 100vh;
+}
+
+.fixed_height {
+  height: 300px;
+}
+
+.full_height,
+.fixed_height {
   display: flex;
   align-items: center;
 }

@@ -97,7 +97,7 @@ export default class PageViewMetricsPage extends React.Component {
     let content = <NoResults />;
 
     if (isLoading) {
-      content = <Spinner />;
+      content = <Spinner isFullHeight />;
     }
 
     if (pageViewTotals !== null && pageViewTotals.length !== 0) {
