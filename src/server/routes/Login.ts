@@ -29,7 +29,13 @@ async function login(req: Request, res: Response, next: NextFunction) {
       shouldForcePasswordChange = true;
     }
 
-    res.status(200).send({ shouldForcePasswordChange });
+    res.status(200).send({
+      user: {
+        id: user.id,
+        name: user.name
+      },
+      shouldForcePasswordChange
+    });
   } catch (e) {
     next(e);
   }
@@ -51,7 +57,12 @@ async function changePassword(req: Request, res: Response, next: NextFunction) {
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     await Users.updatePassword(user.id, hashedPassword);
 
-    res.status(200).send({});
+    res.status(200).send({
+      user: {
+        id: user.id,
+        name: user.name
+      }
+    });
   } catch (e) {
     next(e);
   }

@@ -4,15 +4,27 @@ import LoginPage from "./pages/login/LoginPage";
 import ChangePasswordPage from "./pages/login/ChangePasswordPage";
 import PageViewMetricsPage from "./pages/metrics/PageViewMetricsPage";
 import SettingsPage from "./pages/settings/SettingsPage";
+import { User } from "./types/User.type";
+
+type Context = {
+  user: User | null;
+  setUser: Function;
+};
+
+export const AppContext = React.createContext<Context>({ user: null, setUser: () => {} });
 
 export default function App() {
+  const [user, setUser] = React.useState<User | null>(null);
+
   return (
-    <BrowserRouter>
-      <Route path="/login" component={LoginPage} />
-      <PrivateRoute path="/password" component={ChangePasswordPage} />
-      <PrivateRoute path="/" exact component={PageViewMetricsPage} />
-      <PrivateRoute path="/settings" component={SettingsPage} />
-    </BrowserRouter>
+    <AppContext.Provider value={{ user, setUser }}>
+      <BrowserRouter>
+        <Route path="/login" component={LoginPage} />
+        <PrivateRoute path="/password" component={ChangePasswordPage} />
+        <PrivateRoute path="/" exact component={PageViewMetricsPage} />
+        <PrivateRoute path="/settings" component={SettingsPage} />
+      </BrowserRouter>
+    </AppContext.Provider>
   );
 }
 
