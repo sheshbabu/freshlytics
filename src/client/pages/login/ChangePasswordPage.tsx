@@ -1,21 +1,32 @@
 import React from "react";
 import { Button, Form, Header, Message } from "semantic-ui-react";
+import { RouteComponentProps } from "react-router";
 import request from "../../libs/request";
 import styles from "./ChangePasswordPage.css";
 
-export default function ChangePasswordPage() {
+export default function ChangePasswordPage(props: RouteComponentProps) {
   return (
     <div className={styles.container}>
       <ChangePasswordIllustration />
-      <ChangePasswordForm />
+      <ChangePasswordForm {...props} />
     </div>
   );
 }
 
-function ChangePasswordForm() {
+function ChangePasswordForm(props: RouteComponentProps) {
   const [oldPassword, setOldPassword] = React.useState<string>("");
   const [newPassword, setNewPassword] = React.useState<string>("");
   const [error, setError] = React.useState<string>("");
+
+  async function handleSubmit() {
+    try {
+      await request("/api/change_password", "POST", { oldPassword, newPassword });
+      setError("");
+      props.history.push("/");
+    } catch (e) {
+      setError(e.message);
+    }
+  }
 
   return (
     <div>
@@ -32,7 +43,7 @@ function ChangePasswordForm() {
           <label>New Password</label>
           <input type="password" onChange={e => setNewPassword(e.target.value)} />
         </Form.Field>
-        <Button type="submit" color="green" onClick={() => handleSubmit(oldPassword, newPassword, setError)}>
+        <Button type="submit" color="green" onClick={handleSubmit}>
           Submit
         </Button>
       </Form>
@@ -42,14 +53,4 @@ function ChangePasswordForm() {
 
 function ChangePasswordIllustration() {
   return <div className={styles.illustration} />;
-}
-
-async function handleSubmit(oldPassword: string, newPassword: string, setError: Function) {
-  try {
-    await request("/api/change_password", "POST", { oldPassword, newPassword });
-    setError("");
-    location.replace("/");
-  } catch (e) {
-    setError(e.message);
-  }
 }
