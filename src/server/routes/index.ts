@@ -2,7 +2,7 @@ import express, { Request, Response, NextFunction } from "express";
 import UnauthenticatedError from "../errors/UnauthenticatedError";
 import UnauthorizedError from "../errors/UnauthorizedError";
 import Collect from "./Collect";
-import Login from "./Login";
+import Auth from "./Auth";
 import PageViews from "./PageViews";
 import Users from "./Users";
 
@@ -10,12 +10,12 @@ const router = express.Router();
 
 // public
 router.use("/collect", Collect.collect);
-router.use("/login", Login.login);
+router.use("/login", Auth.login);
 
 // logged in
 router.use(ensureLoggedIn);
-router.use("/change_password", Login.changePassword);
-router.use("/logout", Login.logout);
+router.use("/change_password", Auth.changePassword);
+router.use("/logout", Auth.logout);
 router.get("/user", Users.getFromSession);
 router.get("/users/:user_id", Users.getById);
 router.use("/events/pageviews", PageViews.get);
