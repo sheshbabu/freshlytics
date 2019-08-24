@@ -15,6 +15,7 @@ router.use("/login", Login.login);
 // logged in
 router.use(ensureLoggedIn);
 router.use("/change_password", Login.changePassword);
+router.use("/logout", Login.logout);
 router.get("/user", Users.getFromSession);
 router.get("/users/:user_id", Users.getById);
 router.use("/events/pageviews", PageViews.get);

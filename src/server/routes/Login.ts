@@ -58,7 +58,12 @@ async function changePassword(req: Request, res: Response, next: NextFunction) {
   }
 }
 
+async function logout(req: Request, res: Response) {
+  req.session && req.session.destroy(() => res.sendStatus(401));
+}
+
 export default {
   login,
-  changePassword
+  changePassword,
+  logout
 };
