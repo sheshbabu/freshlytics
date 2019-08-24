@@ -1,16 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Header, Segment, Button } from "semantic-ui-react";
-import useRequest from "../../../components/useRequest";
+import { AppContext } from "../../../App";
 import UserModal from "../users/UserModal";
-import { User } from "../../../types/User.type";
 
 export default function ProfileSection() {
-  const [user, isLoading, refetch] = useRequest<User>(`/api/users/${3}`);
+  const { user } = React.useContext(AppContext);
   const [modalUserId, setModalUserId] = React.useState<string>("");
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
 
-  if (user === null || isLoading) {
+  if (user === null) {
     return null;
   }
 
@@ -21,7 +20,6 @@ export default function ProfileSection() {
 
   function handleModalClose() {
     setIsModalOpen(false);
-    refetch();
   }
 
   return (
