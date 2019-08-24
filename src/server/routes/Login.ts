@@ -7,12 +7,13 @@ import { User } from "../types/User.type";
 async function login(req: Request, res: Response, next: NextFunction) {
   try {
     const user = await Users.getByName(req.body.username);
+    const password = await Users.getPasswordByName(req.body.username);
 
-    if (user === undefined) {
+    if (password === null) {
       throw new Error("Invalid user");
     }
 
-    const isPasswordMatching = await bcrypt.compare(req.body.password, user.password);
+    const isPasswordMatching = await bcrypt.compare(req.body.password, password);
 
     if (!isPasswordMatching) {
       throw new Error("Invalid password");
@@ -29,13 +30,7 @@ async function login(req: Request, res: Response, next: NextFunction) {
       shouldForcePasswordChange = true;
     }
 
-    res.status(200).send({
-      user: {
-        id: user.id,
-        name: user.name
-      },
-      shouldForcePasswordChange
-    });
+    res.status(200).send({ user, shouldForcePasswordChange });
   } catch (e) {
     next(e);
   }
@@ -57,12 +52,7 @@ async function changePassword(req: Request, res: Response, next: NextFunction) {
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     await Users.updatePassword(user.id, hashedPassword);
 
-    res.status(200).send({
-      user: {
-        id: user.id,
-        name: user.name
-      }
-    });
+    res.status(200).send({ user });
   } catch (e) {
     next(e);
   }
