@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar";
 import PageHeader from "../../components/PageHeader";
 import ProjectsTab from "./projects/ProjectsTab";
 import UsersTab from "./users/UsersTab";
+import ProfileSection from "./profile/ProfileSection";
 import CreditsSection from "./credits/CreditsSection";
 
 export default function SettingsPage() {
@@ -47,6 +48,8 @@ export default function SettingsPage() {
       <PageHeader name="Settings" />
       <Divider hidden />
       <Tab panes={panes} />
+      <Divider hidden />
+      <ProfileSection />
       <Divider hidden />
       <CreditsSection />
       <Divider hidden />
