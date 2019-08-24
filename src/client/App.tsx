@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Redirect } from "react-router-dom";
+import request from "./libs/request";
 import LoginPage from "./pages/login/LoginPage";
 import ChangePasswordPage from "./pages/login/ChangePasswordPage";
 import PageViewMetricsPage from "./pages/metrics/PageViewMetricsPage";
@@ -11,10 +12,23 @@ type Context = {
   setUser: Function;
 };
 
-export const AppContext = React.createContext<Context>({ user: null, setUser: () => {} });
+export const AppContext = React.createContext<Context>({
+  user: null,
+  setUser: () => {}
+});
 
 export default function App() {
   const [user, setUser] = React.useState<User | null>(null);
+
+  React.useEffect(() => {
+    const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+
+    if (!isAuthenticated) {
+      return;
+    }
+
+    request("/api/user").then((response: User) => setUser(response));
+  }, []);
 
   return (
     <AppContext.Provider value={{ user, setUser }}>
