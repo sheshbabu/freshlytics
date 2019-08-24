@@ -5,6 +5,7 @@ import Collect from "./Collect";
 import Auth from "./Auth";
 import PageViews from "./PageViews";
 import Users from "./Users";
+import Projects from "./Projects";
 
 const router = express.Router();
 
@@ -18,6 +19,12 @@ router.use("/change_password", Auth.changePassword);
 router.use("/logout", Auth.logout);
 router.get("/user", Users.getFromSession);
 router.get("/users/:user_id", Users.getById);
+router.get("/projects", Users.getAll);
+router.get("/projects/:project_id", Projects.getById);
+router.post("/projects", Projects.add);
+router.put("/projects/:project_id", Projects.update);
+router.delete("/projects/:project_id", Projects.remove);
+
 router.use("/events/pageviews", PageViews.get);
 
 // admin

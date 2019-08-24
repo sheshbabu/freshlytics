@@ -9,6 +9,14 @@ CREATE TABLE "users" (
   "updated_at" TIMESTAMPTZ DEFAULT NOW()
 );
 
+CREATE TABLE "projects" (
+  "id" text PRIMARY KEY,
+  "name" text,
+  "timezone" text,
+  "created_at" TIMESTAMPTZ DEFAULT NOW(),
+  "updated_at" TIMESTAMPTZ DEFAULT NOW()
+);
+
 -- for session persistance using connect-pg-simple
 
 CREATE TABLE "session" (
