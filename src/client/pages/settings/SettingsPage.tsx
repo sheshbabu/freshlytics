@@ -2,9 +2,9 @@ import React from "react";
 import { Container, Divider, Tab, Menu, Icon } from "semantic-ui-react";
 import Navbar from "../../components/Navbar";
 import PageHeader from "../../components/PageHeader";
-import ProjectsTab from "./ProjectsTab";
-import UsersTab from "./UsersTab";
-import CreditsSection from "./CreditsSection";
+import ProjectsTab from "./projects/ProjectsTab";
+import UsersTab from "./users/UsersTab";
+import CreditsSection from "./credits/CreditsSection";
 
 export default function SettingsPage() {
   const panes = [

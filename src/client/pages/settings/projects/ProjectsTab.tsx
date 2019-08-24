@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Table } from "semantic-ui-react";
-import styles from "./SettingsPage.css";
+import styles from "../SettingsPage.css";
 
 export default function ProjectsTab() {
   return (
@@ -25,15 +25,16 @@ function ProjectsTable() {
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell width={4}>Name</Table.HeaderCell>
-          <Table.HeaderCell width={2}>Id</Table.HeaderCell>
-          <Table.HeaderCell width={1}>Actions</Table.HeaderCell>
+          <Table.HeaderCell width={2}>Actions</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
         <Table.Row>
           <Table.Cell>Web</Table.Cell>
-          <Table.Cell>1</Table.Cell>
           <Table.Cell>
+            <Button size="mini" basic>
+              Setup Instructions
+            </Button>
             <Button size="mini" basic>
               Edit
             </Button>
@@ -44,8 +45,10 @@ function ProjectsTable() {
         </Table.Row>
         <Table.Row>
           <Table.Cell>iOS</Table.Cell>
-          <Table.Cell>2</Table.Cell>
           <Table.Cell>
+            <Button size="mini" basic>
+              Setup Instructions
+            </Button>
             <Button size="mini" basic>
               Edit
             </Button>
