@@ -1,4 +1,6 @@
-export default async function request(path: string, method: string = "GET", body?: any) {
+export type HttpMethod = "DELETE" | "GET" | "HEAD" | "OPTIONS" | "POST" | "PUT";
+
+export default async function request(path: string, method: HttpMethod = "GET", body?: any) {
   let headers = {};
 
   if (body instanceof FormData === false) {
