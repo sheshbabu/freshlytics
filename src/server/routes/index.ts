@@ -19,7 +19,7 @@ router.use("/change_password", Auth.changePassword);
 router.use("/logout", Auth.logout);
 router.get("/user", Users.getFromSession);
 router.get("/users/:user_id", Users.getById);
-router.get("/projects", Users.getAll);
+router.get("/projects", Projects.getAll);
 router.get("/projects/:project_id", Projects.getById);
 router.post("/projects", Projects.add);
 router.put("/projects/:project_id", Projects.update);
