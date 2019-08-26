@@ -13,6 +13,10 @@ async function add(req: Request, res: Response, next: NextFunction) {
     }
 
     await Projects.add(projectId, project.name, project.timezone);
+
+    const projects = await Projects.getAll();
+    req.app.locals.projects = projects;
+
     res.sendStatus(200);
   } catch (e) {
     next(e);
@@ -29,6 +33,10 @@ async function update(req: Request, res: Response, next: NextFunction) {
     }
 
     await Projects.update(project_id, project);
+
+    const projects = await Projects.getAll();
+    req.app.locals.projects = projects;
+
     res.sendStatus(200);
   } catch (e) {
     next(e);
@@ -40,6 +48,10 @@ async function remove(req: Request, res: Response, next: NextFunction) {
 
   try {
     await Projects.remove(project_id);
+
+    const projects = await Projects.getAll();
+    req.app.locals.projects = projects;
+
     res.sendStatus(200);
   } catch (e) {
     next(e);

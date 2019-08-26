@@ -1,15 +1,11 @@
-function getCurrentDateInUtc() {
-  const now = new Date();
-  const date = now
-    .getUTCDate()
-    .toString()
-    .padStart(2, "0");
-  const month = (now.getUTCMonth() + 1).toString().padStart(2, "0");
-  const year = now.getFullYear();
+import { DateTime } from "luxon";
 
-  return `${year}-${month}-${date}`;
+function getCurrentDateTimeInTimezone(timezone: string) {
+  return DateTime.local()
+    .setZone(timezone)
+    .toFormat("yyyy-MM-dd");
 }
 
 export default {
-  getCurrentDateInUtc
+  getCurrentDateTimeInTimezone
 };

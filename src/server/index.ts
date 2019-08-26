@@ -10,6 +10,8 @@ const ASSET_PATH = process.env.NODE_ENV === "development" ? "../../dist/client" 
 
 const app = express();
 
+app.locals.projects = [];
+
 app.use(compression());
 app.use(bodyParser.json());
 app.use(
