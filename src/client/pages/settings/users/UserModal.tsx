@@ -21,14 +21,14 @@ export default function UserModal(props: Props) {
   const [error, setError] = React.useState<string>("");
 
   React.useEffect(() => {
-    if (mode !== "edit") {
-      return;
-    }
+    setUser({ id: "", name: "", is_admin: false });
+    setIsLoading(false);
+    setError("");
 
-    request(`/api/users/${userId}`).then((user: User) => {
-      setUser(user);
-    });
-  }, [mode, userId]);
+    if (isOpen && mode === "edit") {
+      request(`/api/users/${userId}`).then(setUser);
+    }
+  }, [isOpen]);
 
   async function handleDelete() {
     try {
@@ -58,7 +58,6 @@ export default function UserModal(props: Props) {
   }
 
   function handleClose() {
-    setError("");
     onClose();
   }
 

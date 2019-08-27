@@ -22,14 +22,14 @@ export default function ProjectModal(props: Props) {
   const [error, setError] = React.useState<string>("");
 
   React.useEffect(() => {
-    if (mode !== "edit") {
-      return;
-    }
+    setProject({ id: "", name: "", timezone: "" });
+    setIsLoading(false);
+    setError("");
 
-    request(`/api/projects/${projectId}`).then((project: Project) => {
-      setProject(project);
-    });
-  }, [mode, projectId]);
+    if (isOpen && mode === "edit") {
+      request(`/api/projects/${projectId}`).then(setProject);
+    }
+  }, [isOpen]);
 
   async function handleDelete() {
     try {
@@ -59,7 +59,6 @@ export default function ProjectModal(props: Props) {
   }
 
   function handleClose() {
-    setError("");
     onClose();
   }
 
