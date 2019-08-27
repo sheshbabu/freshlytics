@@ -3,6 +3,7 @@ import addDays from "date-fns/add_days";
 import isBefore from "date-fns/is_before";
 import isEqual from "date-fns/is_equal";
 import PageViews from "../../src/server/models/PageViews";
+import Projects from "../../src/server/models/Projects";
 
 const paths = [
   "/",
@@ -76,6 +77,8 @@ const browserNameVersions = [
 
 const startDate = new Date("2018-12-31");
 const endDate = new Date("2020-03-02");
+
+Projects.add("1000", "Web", "UTC+08:00");
 
 let currDate = startDate;
 while (isBefore(currDate, endDate) || isEqual(currDate, endDate)) {
