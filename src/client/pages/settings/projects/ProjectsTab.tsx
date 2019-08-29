@@ -3,6 +3,7 @@ import { Button, Table } from "semantic-ui-react";
 import useRequest from "../../../components/useRequest";
 import Spinner from "../../../components/Spinner";
 import ProjectModal, { Mode } from "./ProjectModal";
+import ProjectSetupModal from "./ProjectSetupModal";
 import { Project } from "../../../types/Project.type";
 import styles from "../SettingsPage.css";
 
@@ -10,7 +11,8 @@ export default function ProjectsTab() {
   const [projects, isLoading, refetch] = useRequest<Project[]>("/api/projects");
   const [modalMode, setModalMode] = React.useState<Mode>("add");
   const [modalProjectId, setModalProjectId] = React.useState<string>("");
-  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
+  const [isProjectModalOpen, setIsProjectModalOpen] = React.useState<boolean>(false);
+  const [isProjectSetupModalOpen, setIsProjectSetupModalOpen] = React.useState<boolean>(false);
 
   if (isLoading) {
     return (
@@ -26,24 +28,30 @@ export default function ProjectsTab() {
 
   function handleAddClick() {
     setModalMode("add");
-    setIsModalOpen(true);
+    setIsProjectModalOpen(true);
+  }
+
+  function handleSetupClick(projectId: string) {
+    setModalProjectId(projectId);
+    setIsProjectSetupModalOpen(true);
   }
 
   function handleEditClick(projectId: string) {
     setModalMode("edit");
     setModalProjectId(projectId);
-    setIsModalOpen(true);
+    setIsProjectModalOpen(true);
   }
 
   function handleDeleteClick(projectId: string) {
     setModalMode("delete");
     setModalProjectId(projectId);
-    setIsModalOpen(true);
+    setIsProjectModalOpen(true);
   }
 
   function handleModalClose() {
     setModalProjectId("");
-    setIsModalOpen(false);
+    setIsProjectModalOpen(false);
+    setIsProjectSetupModalOpen(false);
     refetch();
   }
 
@@ -54,14 +62,26 @@ export default function ProjectsTab() {
           Add Project
         </Button>
       </div>
-      <ProjectsTable projects={projects} onEditClick={handleEditClick} onDeleteClick={handleDeleteClick} />
-      <ProjectModal isOpen={isModalOpen} mode={modalMode} projectId={modalProjectId} onClose={handleModalClose} />
+      <ProjectsTable
+        projects={projects}
+        onSetupClick={handleSetupClick}
+        onEditClick={handleEditClick}
+        onDeleteClick={handleDeleteClick}
+      />
+      <ProjectModal
+        isOpen={isProjectModalOpen}
+        mode={modalMode}
+        projectId={modalProjectId}
+        onClose={handleModalClose}
+      />
+      <ProjectSetupModal isOpen={isProjectSetupModalOpen} projectId={modalProjectId} onClose={handleModalClose} />
     </div>
   );
 }
 
 type ProjectsTableProps = {
   projects: Project[];
+  onSetupClick: (projectId: string) => void;
   onEditClick: (projectId: string) => void;
   onDeleteClick: (projectId: string) => void;
 };
@@ -84,6 +104,7 @@ function ProjectsTable(props: ProjectsTableProps) {
 
 type ProjectsTableRowProps = {
   project: Project;
+  onSetupClick: (projectId: string) => void;
   onEditClick: (projectId: string) => void;
   onDeleteClick: (projectId: string) => void;
 };
@@ -93,7 +114,7 @@ function ProjectsTableRow(props: ProjectsTableRowProps) {
     <Table.Row>
       <Table.Cell>{props.project.name}</Table.Cell>
       <Table.Cell>
-        <Button size="mini" basic onClick={() => {}}>
+        <Button size="mini" basic onClick={() => props.onSetupClick(props.project.id)}>
           Setup Instructions
         </Button>
         <Button size="mini" basic onClick={() => props.onEditClick(props.project.id)}>

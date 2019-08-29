@@ -50,6 +50,7 @@
     "node-pg-migrate": "3.20.0",
     "pg": "7.11.0",
     "react": "16.8.6",
+    "react-clipboard.js": "^2.0.13",
     "react-dom": "16.8.6",
     "react-router-dom": "5.0.1",
     "semantic-ui-calendar-react": "0.15.0",

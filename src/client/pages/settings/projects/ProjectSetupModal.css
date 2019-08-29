@@ -1,0 +1,14 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button_container {
+  min-width: 500px;
+}
+
+.code {
+  padding: 10px;
+  font-family: Monaco, Menlo, Consolas, Courier New, monospace;
+}
