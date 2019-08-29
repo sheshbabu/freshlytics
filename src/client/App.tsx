@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import request from "./libs/request";
 import LoginPage from "./pages/login/LoginPage";
 import ChangePasswordPage from "./pages/login/ChangePasswordPage";
-import PageViewMetricsPage from "./pages/metrics/PageViewMetricsPage";
+import HomePage from "./pages/home/HomePage";
 import SettingsPage from "./pages/settings/SettingsPage";
 import { User } from "./types/User.type";
 
@@ -35,7 +35,7 @@ export default function App() {
       <BrowserRouter>
         <Route path="/login" component={LoginPage} />
         <PrivateRoute path="/password" component={ChangePasswordPage} />
-        <PrivateRoute path="/" exact component={PageViewMetricsPage} />
+        <PrivateRoute path="/" exact component={HomePage} />
         <PrivateRoute path="/settings" component={SettingsPage} />
       </BrowserRouter>
     </AppContext.Provider>

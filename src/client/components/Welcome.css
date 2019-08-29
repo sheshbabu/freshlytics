@@ -1,0 +1,15 @@
+.container {
+  text-align: center;
+}
+
+.banner {
+  background: url("../assets/welcome.png");
+  background-size: cover;
+  width: 100%;
+  height: 500px;
+  margin-bottom: -25px;
+}
+
+.subtitle {
+  margin-top: 5px;
+}

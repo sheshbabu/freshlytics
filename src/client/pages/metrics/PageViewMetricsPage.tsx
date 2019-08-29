@@ -1,14 +1,12 @@
 import React from "react";
-import { Container, Divider } from "semantic-ui-react";
-import Navbar from "../../components/Navbar";
+import { Divider, DropdownProps } from "semantic-ui-react";
 import Titlebar from "../../components/Titlebar";
 import Chart, { PageViewsByDateRow } from "../../components/Chart";
 import MetricsTable, { Row } from "../../components/MetricsTable";
 import Spinner from "../../components/Spinner";
 import NoResults from "../../components/NoResults";
 import request from "../../libs/request";
-
-const DEFAULT_PROJECT_ID = 1000;
+import { Project } from "../../types/Project.type";
 
 const DIMENSIONS = [
   { text: "Path", value: "path" },
@@ -17,24 +15,33 @@ const DIMENSIONS = [
   { text: "Browser Versions", value: "browser_name_version" }
 ];
 
+type Props = {
+  projects: Project[];
+};
+
 type State = {
   pageViewTotals: PageViewsByDateRow[] | null;
   pageViewsByDimension: Array<Row> | null;
   selectedDimension: string;
   currentPage: number;
+  projectId: string;
   dateRange: string;
   isLoading: boolean;
 };
 
-export default class PageViewMetricsPage extends React.Component {
-  state: State = {
-    pageViewTotals: null,
-    pageViewsByDimension: null,
-    selectedDimension: DIMENSIONS[0].value,
-    currentPage: 0,
-    dateRange: "",
-    isLoading: true
-  };
+export default class PageViewMetricsPage extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      pageViewTotals: null,
+      pageViewsByDimension: null,
+      selectedDimension: DIMENSIONS[0].value,
+      currentPage: 0,
+      projectId: props.projects[0].id,
+      dateRange: "",
+      isLoading: true
+    };
+  }
 
   componentDidMount() {
     this.makeRequests();
@@ -54,7 +61,7 @@ export default class PageViewMetricsPage extends React.Component {
   }
 
   async makeRequest(path: string, dimension?: string, page?: number) {
-    const projectId = DEFAULT_PROJECT_ID;
+    const projectId = this.state.projectId;
     const startDate = this.state.dateRange.split(" - ")[0];
     const endDate = this.state.dateRange.split(" - ")[1];
 
@@ -75,7 +82,12 @@ export default class PageViewMetricsPage extends React.Component {
     return await request(path);
   }
 
-  handleDateChange = (_event: React.SyntheticEvent, data: any) => {
+  handleProjectChange = (e: React.SyntheticEvent, data: DropdownProps) => {
+    const projectId = data.value as string;
+    this.setState({ projectId }, this.makeRequests);
+  };
+
+  handleDateChange = (e: React.SyntheticEvent, data: { value: string }) => {
     const dateRange = data.value;
     const startDate = dateRange.split(" - ")[0];
     const endDate = dateRange.split(" - ")[1];
@@ -83,11 +95,12 @@ export default class PageViewMetricsPage extends React.Component {
     this.setState({ dateRange, currentPage: 0 }, () => startDate !== "" && endDate !== "" && this.makeRequests());
   };
 
-  handleDimensionChange = (_event: React.SyntheticEvent, data: any) => {
-    this.setState({ selectedDimension: data.value, currentPage: 0 }, this.makeRequests);
+  handleDimensionChange = (e: React.SyntheticEvent, data: DropdownProps) => {
+    const selectedDimension = data.value as string;
+    this.setState({ selectedDimension, currentPage: 0 }, this.makeRequests);
   };
 
-  handlePageChange = (_event: React.SyntheticEvent, data: any) => {
+  handlePageChange = (e: React.SyntheticEvent, data: DropdownProps) => {
     this.setState({ currentPage: data.activePage - 1 }, this.makeRequests);
   };
 
@@ -120,12 +133,16 @@ export default class PageViewMetricsPage extends React.Component {
     }
 
     return (
-      <Container text>
-        <Navbar />
-        <Divider hidden />
-        <Titlebar pageName="Page Views" dateRange={dateRange} onDateChange={this.handleDateChange} />
+      <>
+        <Titlebar
+          pageName="Page Views"
+          projects={this.props.projects}
+          dateRange={dateRange}
+          onProjectChange={this.handleProjectChange}
+          onDateChange={this.handleDateChange}
+        />
         {content}
-      </Container>
+      </>
     );
   }
 }

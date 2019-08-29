@@ -1,35 +1,31 @@
 import React from "react";
-import { Dropdown } from "semantic-ui-react";
+import { Dropdown, DropdownProps } from "semantic-ui-react";
 import { DatesRangeInput } from "semantic-ui-calendar-react";
 import PageHeader from "./PageHeader";
+import { Project } from "../types/Project.type";
 import styles from "./Titlebar.css";
-
-type DateChangeFunction = (e: React.SyntheticEvent<HTMLElement, Event>, data: any) => void;
 
 type Props = {
   pageName: string;
+  projects: Project[];
   dateRange: string;
-  onDateChange: DateChangeFunction;
+  onProjectChange: (e: React.SyntheticEvent<HTMLElement, Event>, data: DropdownProps) => void;
+  onDateChange: (e: React.SyntheticEvent<HTMLElement, Event>, data: { value: string }) => void;
 };
 
-const options = [
-  {
-    key: "Web",
-    text: "Web",
-    value: "Web"
-  },
-  {
-    key: "iOS",
-    text: "iOS",
-    value: "iOS"
-  }
-];
-
 export default function Titlebar(props: Props) {
+  const options = props.projects.map(p => ({ text: p.name, value: p.id }));
+
   return (
     <div className={styles.container}>
       <PageHeader name={props.pageName} />
-      <Dropdown placeholder="Select Project" selection options={options} />
+      <Dropdown
+        placeholder="Select Project"
+        selection
+        defaultValue={options[0].value}
+        options={options}
+        onChange={props.onProjectChange}
+      />
       <DatePicker {...props} />
     </div>
   );
