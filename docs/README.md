@@ -10,19 +10,22 @@ Provide a way for website owners to learn more about how the users are using the
 
 ## Features
 
+- Privacy
+  - Cookies are not used
+  - Personally identifiable information (PII) is not collected
 - Dashboard
   - Switch between multiple projects
   - Slice the data within a date range
   - See the pageview in different dimensions like page urls, referrers, browsers etc
+- Tracking
+  - Currently focusses on website pageview tracking
+  - Tracks visited page urls, referrers, browsers and browser versions
 - Projects
   - Supports multiple projects
   - Different projects can have different reporting timezones
 - Users
   - Users can either be Admin or normal users
   - Admins can create/edit/delete projects and other users
-- Tracking
-  - Currently focusses on website pageview tracking
-  - Tracks visited page urls, referrers, browsers and browser versions
 
 ## System Requirements
 
