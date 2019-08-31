@@ -16,17 +16,20 @@ export default function ProjectSetupModal(props: Props) {
   const codeRef = React.useRef<HTMLPreElement>(null);
   const [url, setUrl] = React.useState<string>(initialBaseUrl);
 
-  const code = `(function() {
+  const code = `<!-- freshlytics snippet -->
+
+<script>
+  (function() {
     var COLLECT_URL = "${url}/collect";
     var PROJECT_ID = "${projectId}";
     var GLOBAL_VAR_NAME = "__freshlytics__";
-  
+
     window[GLOBAL_VAR_NAME] = {};
-  
+
     window[GLOBAL_VAR_NAME].sendPageView = function() {
       var path = location.pathname;
       var referrer = document.referrer;
-  
+
       var url =
         COLLECT_URL +
         "?project_id=" +
@@ -35,14 +38,16 @@ export default function ProjectSetupModal(props: Props) {
         encodeURIComponent(path) +
         "&referrer=" +
         encodeURIComponent(referrer);
-  
+
       var xhr = new XMLHttpRequest();
       xhr.open("GET", url);
       xhr.send();
     };
-  
+
     window[GLOBAL_VAR_NAME].sendPageView();
-  })();`;
+  })();
+</script>
+`;
 
   function handleUrlChange(e: React.ChangeEvent<HTMLInputElement>) {
     setUrl(e.target.value);
@@ -54,7 +59,8 @@ export default function ProjectSetupModal(props: Props) {
       <Modal.Header>Setup Instructions</Modal.Header>
       <Modal.Content scrolling>
         <Message>
-          <p>Enter the Base URL of the server below and copy paste the code snippet below in your HTML file</p>
+          <p>1. Enter the Base URL of the server to correctly generate your tracking snippet</p>
+          <p>2. Copy paste the tracking snippet in your HTML file at the end of head tag</p>
         </Message>
         <div className={styles.toolbar}>
           <div className={styles.button_container}>
