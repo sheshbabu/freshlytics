@@ -75,7 +75,7 @@ export default function ProjectSetupModal(props: Props) {
         <Divider hidden />
       </Modal.Content>
       <Modal.Actions>
-        <Button onClick={close}>Close</Button>
+        <Button onClick={onClose}>Close</Button>
       </Modal.Actions>
     </Modal>
   );
