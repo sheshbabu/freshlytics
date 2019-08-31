@@ -3,5 +3,5 @@
 - [Introduction](./README.md)
 - [Installation](./installation.md)
 - [Usage](./usage.md)
-- [Contributing](./README.md)
+- [Development](./development.md)
 - [Screenshots](./screenshots.md)
