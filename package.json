@@ -1,6 +1,7 @@
 {
   "name": "freshlytics",
   "version": "1.0.0-beta",
+  "repository": "https://github.com/sheshbabu/freshlytics",
   "description": "Analytics",
   "author": "Sheshbabu Chinnakonda",
   "license": "MIT",
