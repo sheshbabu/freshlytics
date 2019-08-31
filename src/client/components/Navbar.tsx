@@ -23,9 +23,9 @@ export default function Navbar() {
           </Link>
         </Menu.Item>
         <Menu.Item>
-          <Link to="/" className={styles.link} onClick={handleLogout}>
+          <span className={styles.link} onClick={handleLogout}>
             Logout
-          </Link>
+          </span>
         </Menu.Item>
       </Menu.Menu>
     </Menu>
