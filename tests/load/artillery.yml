@@ -14,6 +14,6 @@ config:
 scenarios:
   - flow:
       - get:
-          url: "/api/collect/?projectId={{ projectId }}&path={{ path }}&referrer={{ referrer }}"
+          url: "/api/collect/?project_id={{ projectId }}&path={{ path }}&referrer={{ referrer }}"
           headers:
             user-agent: "{{ ua }}"
