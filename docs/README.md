@@ -1,6 +1,6 @@
 # Freshlytics
 
-## Whats is Freshlytics?
+## What is Freshlytics?
 
 It's a self-hosted privacy-friendly analytics service. It aims to be reliable, friendly to use and easy to deploy.
 
