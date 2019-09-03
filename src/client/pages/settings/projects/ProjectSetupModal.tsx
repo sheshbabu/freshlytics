@@ -20,7 +20,7 @@ export default function ProjectSetupModal(props: Props) {
 
 <script>
   (function() {
-    var COLLECT_URL = "${url}/collect";
+    var COLLECT_URL = "${url}/api/collect";
     var PROJECT_ID = "${projectId}";
     var GLOBAL_VAR_NAME = "__freshlytics__";
 
