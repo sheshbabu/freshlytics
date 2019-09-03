@@ -18,7 +18,7 @@ Start by giving the project a name (Web, MobileWeb, InternalCRM etc). The timezo
 
 Once the project is added, click on `Setup Instructions` to get the tracking snippet. Enter the public URL of the instance in the base URL field and click on `Copy to clipboard`.
 
-Add this tracking snippet to all your webpages that you want to be tracked.
+Add this tracking snippet inside the `<head></head>` section of all your webpages that you want to be tracked.
 
 ## Add users
 

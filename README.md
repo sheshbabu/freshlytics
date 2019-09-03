@@ -31,6 +31,7 @@ Freshlytics is an open source privacy-friendly analytics software. It aims to be
 - [Installation](./docs/installation.md)
 - [Usage](./docs/usage.md)
 - [Development](./docs/development.md)
+- [Troubleshooting](./docs/troubleshooting.md)
 - [Screenshots](./docs/screenshots.md)
 
 ## Contributing
