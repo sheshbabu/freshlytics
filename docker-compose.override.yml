@@ -1,19 +1,18 @@
-version: "3"
+version: "3.4"
 
 services:
   freshlytics:
+    image: freshlytics/freshlytics:development
     build:
-      context: .
-      dockerfile: Dockerfile.dev
+      target: development
     ports:
       - "3000:3000"
       - "3001:3001"
     volumes:
-      - ./src/client:/app/src/client
-      - ./src/server:/app/src/server
+      - ./src/client:/usr/src/freshlytics/client:rw
+      - ./src/server:/usr/src/freshlytics/server:rw
     environment:
       - NODE_ENV=development
-    command: npm run dev
 
   db:
     ports:
