@@ -1,5 +1,5 @@
 ARG NODE_VERSION="12.2.0"
-FROM library/node:${NODE_VERSION} AS development
+FROM node:${NODE_VERSION} AS development
 
 ENV NODE_ENV "development"
 WORKDIR /usr/src/freshlytics
@@ -17,7 +17,7 @@ FROM development AS builder
 ENV NODE_ENV "production"
 RUN npm run build
 
-FROM library/node:${NODE_VERSION}-slim AS production
+FROM node:${NODE_VERSION}-slim AS production
 
 ENV NODE_ENV "production"
 WORKDIR /usr/src/freshlytics
