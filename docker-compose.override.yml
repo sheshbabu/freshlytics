@@ -11,8 +11,6 @@ services:
     volumes:
       - ./src/client:/usr/src/freshlytics/client:rw
       - ./src/server:/usr/src/freshlytics/server:rw
-    environment:
-      - NODE_ENV=development
 
   db:
     ports:
