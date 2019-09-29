@@ -41,4 +41,4 @@ RUN chown -R node:node .
 USER node
 
 CMD ["npm", "start"]
-EXPOSE 3000/tcp 3001/tcp
+EXPOSE 3001/tcp
