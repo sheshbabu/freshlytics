@@ -19,11 +19,9 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        loader: "awesome-typescript-loader",
-        options: {
-          configFileName: "./src/client/tsconfig.client.json"
-        }
+        test: /\.(ts|js)x?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
       },
       {
         enforce: "pre",
@@ -60,7 +58,7 @@ const config = {
   stats: "errors-only"
 };
 
-module.exports = function(env, argv) {
+module.exports = function (env, argv) {
   let scriptFileName = "";
   let stylesFileName = "";
 
