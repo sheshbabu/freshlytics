@@ -1,17 +1,16 @@
-version: "3"
+version: "3.4"
 
 services:
   freshlytics:
-    image: freshlytics/freshlytics
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile.prod
+    image: freshlytics/freshlytics:latest
+    build:
+      context:    .
+      dockerfile: Dockerfile
+      target:     production
     ports:
       - "80:3001"
     environment:
       - DATABASE_URL=postgres://postgres:hunter2@db:5432/freshlytics
-      - NODE_ENV=production
-    command: npm start
     depends_on:
       - db
 
@@ -21,4 +20,7 @@ services:
       - POSTGRES_PASSWORD=hunter2
       - POSTGRES_DB=freshlytics
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data:rw
+
+volumes:
+  db_data:
