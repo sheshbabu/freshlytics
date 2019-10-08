@@ -46,7 +46,7 @@
     "express": "4.17.0",
     "express-session": "1.16.2",
     "frappe-charts": "1.1.0",
-    "luxon": "^1.17.2",
+    "luxon": "^1.19.3",
     "nanoid": "^2.0.3",
     "node-pg-migrate": "3.20.0",
     "pg": "7.11.0",
