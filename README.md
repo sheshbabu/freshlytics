@@ -16,7 +16,7 @@ Freshlytics is an open source privacy-friendly analytics software. It aims to be
   - Slice the data within a date range
   - See the pageview in different dimensions like page urls, referrers, browsers etc
 - Tracking
-  - Currently focusses on website pageview tracking
+  - Currently focuses on website pageview tracking
   - Tracks visited page urls, referrers, browsers and browser versions
 - Projects
   - Supports multiple projects
