@@ -57,6 +57,8 @@
     "semantic-ui-calendar-react": "0.15.0",
     "semantic-ui-css": "2.4.1",
     "semantic-ui-react": "0.86.0",
+    "ts-node": "8.8.2",
+    "typescript": "3.8.3",
     "useragent": "2.3.0"
   },
   "devDependencies": {
@@ -91,8 +93,6 @@
     "nodemon": "1.19.0",
     "prettier": "1.17.1",
     "source-map-loader": "0.2.4",
-    "ts-node": "8.1.0",
-    "typescript": "3.4.5",
     "url-loader": "1.1.2",
     "webpack": "4.32.2",
     "webpack-cli": "3.3.2",
