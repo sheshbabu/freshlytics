@@ -4,7 +4,9 @@
 
 Freshlytics is an open source privacy-friendly analytics software. It aims to be reliable, friendly to use and easy to deploy.
 
-> Note: This is still in beta so use in production with care.
+![Docker Pulls](https://img.shields.io/docker/pulls/freshlytics/freshlytics?style=flat-square)
+
+<p align="center"><img src="https://raw.githubusercontent.com/sheshbabu/freshlytics/master/docs/screenshots/home.png" /></p>
 
 ## Features
 
