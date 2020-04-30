@@ -20,7 +20,9 @@
     "seed:test": "ts-node ./tests/fixtures/PageViews.fixture.ts",
     "lint": "eslint --ext .ts,.tsx .",
     "test:load": "artillery run ./tests/load/artillery.yml",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "prettier": {
     "printWidth": 120
@@ -59,7 +61,8 @@
     "semantic-ui-react": "0.86.0",
     "ts-node": "8.8.2",
     "typescript": "3.8.3",
-    "useragent": "2.3.0"
+    "useragent": "2.3.0",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@types/bcrypt": "3.0.0",
@@ -97,5 +100,6 @@
     "webpack": "4.32.2",
     "webpack-cli": "3.3.2",
     "webpack-dev-server": "3.4.1"
-  }
+  },
+  "snyk": true
 }
