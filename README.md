@@ -1,4 +1,8 @@
-<p align="center"><img src="https://raw.githubusercontent.com/sheshbabu/freshlytics/master/docs/title.png" /></p>
+<p align="center">
+  <a href="./docs/README.md" alt="Freshlytics">
+    <img src="https://raw.githubusercontent.com/sheshbabu/freshlytics/master/docs/title.png" alt="Freshlytics" />
+  </a>
+</p>
 
 ## Overview
 
