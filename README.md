@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="./docs/README.md" alt="Freshlytics">
+  <a href="https://github.com/sheshbabu/freshlytics/blob/master/docs/README.md" alt="Freshlytics">
     <img src="https://raw.githubusercontent.com/sheshbabu/freshlytics/master/docs/title.png" alt="Freshlytics" />
   </a>
 </p>
