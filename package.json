@@ -48,7 +48,7 @@
     "frappe-charts": "1.1.0",
     "luxon": "^1.17.2",
     "nanoid": "^2.0.3",
-    "node-pg-migrate": "3.20.0",
+    "node-pg-migrate": "7.0.0",
     "pg": "7.11.0",
     "react": "16.8.6",
     "react-clipboard.js": "^2.0.13",
@@ -56,7 +56,7 @@
     "react-router-dom": "5.0.1",
     "semantic-ui-calendar-react": "0.15.0",
     "semantic-ui-css": "2.4.1",
-    "semantic-ui-react": "0.86.0",
+    "semantic-ui-react": "2.0.4",
     "ts-node": "8.8.2",
     "typescript": "3.8.3",
     "useragent": "2.3.0"
