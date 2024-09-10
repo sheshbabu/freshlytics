@@ -53,7 +53,7 @@
     "react": "16.8.6",
     "react-clipboard.js": "^2.0.13",
     "react-dom": "16.8.6",
-    "react-router-dom": "5.0.1",
+    "react-router-dom": "6.0.0",
     "semantic-ui-calendar-react": "0.15.0",
     "semantic-ui-css": "2.4.1",
     "semantic-ui-react": "0.86.0",
