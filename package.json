@@ -37,7 +37,7 @@
     ]
   },
   "dependencies": {
-    "bcrypt": "3.0.6",
+    "bcrypt": "5.0.1",
     "body-parser": "1.19.0",
     "compression": "1.7.4",
     "connect-pg-simple": "6.0.1",
@@ -48,7 +48,7 @@
     "frappe-charts": "1.1.0",
     "luxon": "^1.17.2",
     "nanoid": "^2.0.3",
-    "node-pg-migrate": "3.20.0",
+    "node-pg-migrate": "7.0.0",
     "pg": "7.11.0",
     "react": "16.8.6",
     "react-clipboard.js": "^2.0.13",
